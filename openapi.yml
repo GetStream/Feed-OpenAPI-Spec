@@ -1,0 +1,658 @@
+openapi: '3.0.2'
+info:
+  title: Stream Activity Feeds
+  contact:
+    name: Stream Support
+    url: https://getstream.io/contact/support/
+    email: support@getstream.io
+  version: '1.0'
+servers:
+  - url: https://api.stream-io-api.com/api/v1.0/
+    description: The standard API server
+  - url: https://{region}-api.stream-io-api.com/api/v1.0
+    description: Regional API servers
+    variables:
+      region:
+        default: us-east
+        enum:
+        # need to add all regions here
+          - us-east
+          - eu-west
+          - singapore
+security:
+  - bearerAuth: []
+  - api_key: []
+
+paths:
+  /activities: 
+    parameters:
+      - $ref: '#/components/parameters/api_key'
+      - $ref: '#/components/parameters/content-type'
+      - $ref: '#/components/parameters/auth-type'
+      - $ref: '#/components/parameters/token'
+    post:
+      description: | 
+        Send a JSON encoded list of activities to update. Max len is 100. 
+        This is particularly useful when you want to update certain activity
+        metadata used during feed ranking. Activities are updated by `foreign_id`.
+        Changing the original `time` property is not allowed.
+      requestBody:
+        content:
+          application/json:
+            schema:
+            # I am not sure this is a good schema to use...
+              properties:
+                activities:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Activity'
+      responses:
+          ## TODO :-)
+    get:
+      description: Retrieve specific activities.
+      parameters:
+        - in: query
+          name: ids
+          required: false
+          schema:
+            type: string
+          description: |
+            A comma separated list of activity IDs. Maximum length is 100.
+        - in: query
+          name: foreign_ids
+          required: false
+          schema:
+            type: string
+          description: |
+            A comma separated list of activity foreign IDs. 
+            Maximum length is 100, and must match the length of `timestamps`.
+        - in: query
+          name: timestamps
+          required: false
+          schema:
+            type: string
+          description: |
+            A comma separated list of activity timestamps. 
+            Maximum length is 100, and must match the length of `foreign_ids`.
+        - in: query
+          name: withRecentReactions
+          required: false
+          schema:
+            type: string
+          description: |
+            If true activity object will have attribute `latest_reactions` 
+            that contains list of recently created reactions
+        - in: query
+          name: recentReactionsLimit
+          required: false
+          schema:
+            type: string
+          description: |
+            Specify number of reactions in the `latest_reactions` attribute, 
+            maximum value is 25.
+        - in: query
+          name: withOwnReactions
+          required: false
+          schema:
+            type: string
+          description: |
+            If true activity object will have attribute `own_reactions` 
+            that contains list of reactions created by the user himself.
+        - in: query
+          name: withReactionCounts
+          required: false
+          schema:
+            type: string
+          description: |
+            If true activity object will have attribute `reaction_counts` 
+            that contains number of reactions for each kind
+      responses:
+        # TODO :-)
+        
+  /enrich/activities: 
+    get: 
+      description: Retrieve specific (enriched) activities.
+      parameters:
+        - in: query
+          name: ids
+          required: false
+          schema:
+            type: string
+          description: |
+            A comma separated list of activity IDs. Maximum length is 100.
+        - in: query
+          name: foreign_ids
+          required: false
+          schema:
+            type: string
+          description: |
+            A comma separated list of activity foreign IDs. 
+            Maximum length is 100, and must match the length of `timestamps`.
+        - in: query
+          name: timestamps
+          required: false
+          schema:
+            type: string
+          description: |
+            A comma separated list of activity timestamps. 
+            Maximum length is 100, and must match the length of `foreign_ids`.
+        - in: query
+          name: withRecentReactions
+          required: false
+          schema:
+            type: string
+          description: |
+            If true activity object will have attribute `latest_reactions` 
+            that contains list of recently created reactions
+        - in: query
+          name: recentReactionsLimit
+          required: false
+          schema:
+            type: string
+          description: |
+            Specify number of reactions in the `latest_reactions` attribute, 
+            maximum value is 25.
+        - in: query
+          name: withOwnReactions
+          required: false
+          schema:
+            type: string
+          description: |
+            If true activity object will have attribute `own_reactions` 
+            that contains list of reactions created by the user himself.
+        - in: query
+          name: withReactionCounts
+          required: false
+          schema:
+            type: string
+          description: |
+            If true activity object will have attribute `reaction_counts` 
+            that contains number of reactions for each kind 
+      responses:
+        # TODO
+  /activity:
+    parameters:
+    - $ref: '#/components/parameters/api_key'
+    - $ref: '#/components/parameters/content-type'
+    - $ref: '#/components/parameters/auth-type'
+    - $ref: '#/components/parameters/token'
+    post:
+      description: |
+        For updating only parts of one or more activities by changing, 
+        adding, or removing fields.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                changes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        description: The target activity ID.
+                        type: string
+                      foreign_id:
+                        description: The target activity foreign ID (matched with `time`).
+                        type: string
+                      time:
+                        description: The target activity timestamp (matched with `foreign_id`).
+                        type: string
+                      set:
+                        description: |
+                          An object containing the set operations, where keys are the 
+                          target fields and the values are the values to be set. 
+                          Maximum 25 top level keys.
+                        type: object
+                        additionalProperties: 
+                          type: string
+                      unset:
+                        description: | 
+                          A list of strings containing the fields to be 
+                          removed from the activity. Maximum 25 keys.
+                          Must not collide with the keys in `set`.
+                        type: object
+                        additionalProperties:
+                          type: string
+        response:
+
+  /feed/{feed_slug}/{user_id}:
+    get:
+    post:
+  /enrich/feed/{feed_slug}/{user_id}:
+    get:
+    post:
+  /feed/{feed_slug}/{user_id}/{activity_id|foreign_id}:
+    delete:
+  /feed/{feed_slug}/{user_id}/followers:
+    get:
+  /feed/{feed_slug}/{user_id}/follows:
+    get:
+    post:
+  /feed/{feed_slug}/{user_id}/following/{target}:
+    delete:
+  /feed/add_to_many:
+    post:
+  /follow_many:
+    post:
+  /reaction:
+    post:
+  /reaction/{id}:
+    get:
+    delete:
+    put:
+  /reaction/{lookup_addr}/{lookup_value}/{kind}:
+    get:
+  /og:
+    get:
+  /collections/{collection_name}:
+    post:
+  /collections/{collection_name}/{id}:
+    get:
+    put:
+    delete:
+  /collections:
+    get:
+    post:
+    delete:
+  /files:
+    post:
+    delete:
+  /images:
+    get:
+    post:
+    delete:
+  /user:
+    post:
+  /user/{id}:
+    get:
+    put:
+    delete:
+
+
+
+#######################################################
+# Components
+#######################################################
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: query
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    api_key:
+      in: query
+      name: api_key
+      required: true
+      schema:
+        type: string
+    content-type:
+      in: header
+      name: Content-Type
+      required: true
+      schema:
+        type: string
+        enum: [application/json]
+    auth-type:
+      in: header
+      name: Stream-Auth-Type
+      required: true
+      schema:
+        type: string
+        enum: [jwt]
+    token:
+      in: header
+      name: Authorization
+      required: true
+      schema:
+        type: string
+      description: Your authorization token
+  schemas:
+    #################################################
+    # Activities
+    #################################################
+    BaseActivity:
+      required:
+        - object
+        - verb
+      properties:
+        object:
+          type: string
+        verb:
+          type: string
+        target:
+          type: string 
+        to: 
+          type: array
+          items:
+            type: string
+    NewActivity:
+      allOf:
+        - $ref: '#/components/schemas/BaseActivity'
+        - type: object
+          required:
+            - actor
+          properties:
+            actor:
+              # can also be StringUser type
+              type: string
+            foreign_id:
+              type: string
+            time:
+              type: string
+            AnyValue: 
+              description: any custom fields you have
+    UpdateActivity:
+      allOf:
+        - $ref: '#/components/schemas/BaseActivity'
+        - type: object 
+          required:
+            - actor
+            - foreign_id
+            - time
+          properties:
+            actor:
+              type: string
+            foreign_id:
+              type: string
+            time: 
+              type: string
+            AnyValue: 
+              description: any custom fields you have
+    Activity:
+      allOf:
+        - $ref: '#/components/schemas/BaseActivity'
+        - type: object 
+          required:
+            - actor
+            - foreign_id
+            - id
+            - time
+          properties:
+            actor:
+              type: string
+            foreign_id:
+              type: string
+            id:
+              type: string
+            time: 
+              type: string
+            analytics:
+              type: string
+              #Record
+            extra_context:
+              type: string
+              #UR
+            origin:
+              type: string
+            score: 
+              type: number   
+            AnyValue: 
+              description: any custom fields you have    
+    EnrichedActivity:
+      allOf:
+        - $ref: '#/components/schemas/Activity'
+          # need to figure out how to override actor & object
+        - type: object
+          properties:
+            latest_reactions:
+              type:  
+            latest_reactions_extra:
+              type:  
+            own_reactions:
+              type:
+            own_reactions_extra:
+              type: object
+              additionalProperties: 
+                type: object
+                properties:
+                  next:
+                    type: string
+            reaction:
+              $ref: '#/components/schemas/EnrichedReaction'
+            reaction_counts:
+              type: object
+              additionalProperties: 
+                type: number
+    FlatActivity:
+      allOf:
+        - $ref: '#/components/schemas/Activity'
+    FlatActivityEnriched:
+      allOf:
+        - $ref: '#/components/schemas/EnrichedActivity'
+    BaseAggregatedActivity:
+      required:
+        - activity_count
+        - actor_count
+        - created_at
+        - group
+        - id
+        - updated_at
+        - verb
+      properties:
+        activity_count:
+          type: number
+        actor_count:
+          type: number
+        created_at:
+          type: string
+        group:
+          type: string
+        id:
+          type: string
+        updated_at:
+          type: string
+        verb:
+          type: string
+        score: 
+          type: number
+    AggregatedActivity:
+      allOf:
+        - $ref: '#/components/schemas/BaseAggregatedActivity'
+        - type: object
+          properties:
+            activities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Activity'
+    AggregatedActivityEnriched:
+      allOf:
+        - $ref: '#/components/schemas/BaseAggregatedActivity'
+        - type: object
+          properties:
+            activities:
+              type: array
+              items: 
+                $ref: '#/components/schemas/EnrichedActivity'
+    BaseNotificationActivity:
+      required:
+        - is_read
+        - is_seen
+      properties:
+        is_read:
+          type: boolean
+        is_seen:
+          type: boolean
+    NotificationActivity:
+      allOf:
+        - $ref: '#/components/schemas/BaseNotificationActivity'
+        - $ref: '#/components/schemas/AggregatedActivity'  
+    NotificationActivityEnriched:
+      allOf:
+        - $ref: '#/components/schemas/BaseNotificationActivity'
+        - $ref: '#/components/schemas/AggregatedActivityEnriched'
+    #################################################
+    # Reactions
+    #################################################
+    Reaction:
+      required:
+        - activity_id
+        - created_at
+        - data
+        - id
+        - kind
+        - parent
+        - updated_at
+        - user_id
+      properties:
+        activity_id:
+          type: string
+        created_at:
+          type: string
+        data:
+          type: #T
+        id:
+          type: string
+        kind:
+          type: string
+        parent:
+          type: string
+        updated_at:
+          type: string
+        user_id:
+          type: string
+        target_fields:
+          type: array
+          items:
+            type: string
+        target_fields_extra_data:
+            type: object
+            additionalProperties: true
+    EnrichedReaction:
+      allOf:
+        - $ref: '#/components/schemas/Reaction'
+        - type: object
+          required:
+            - children_counts
+            - latest_children
+          properties:
+            children_counts:
+              type: object
+              additionalProperties: 
+                type: number
+            latest_children:
+              type: object
+              additionalProperties: 
+                type: #ChildReactionType
+            latest_children_extra:
+              type: object
+              additionalProperties: 
+                type: object
+                additionalProperties: 
+                  type: string
+            own_children:
+              type: object
+              additionalProperties: 
+                type: #ChildReactionType
+            user:
+              type: #EnrichedUser
+    ReactionRecords:
+      type: object
+      additionalProperties: 
+        $ref: '#/components/schemas/EnrichedReaction' 
+    #################################################
+    # API Responses
+    #################################################
+    APIResponse:
+      properties:
+        duration:
+          type: string
+    FileUploadAPIResponse:
+      allOf:
+        - $ref: '#/components/schemas/APIResponse'
+        - type: object
+          required:
+            - file
+          properties:
+            file:
+              type: string
+    RefreshUrlAPIResponse:
+      allOf:
+        - $ref: '#/components/schemas/APIResponse'
+        - type: object
+          required:
+            - url
+          properties:
+            url:
+              type: string
+    FeedAPIResponse:
+      allOf:
+        - $ref: '#/components/schemas/APIResponse'
+        - type: object
+          required:
+            - next
+            - results
+          properties:
+            next:
+              type: string
+            results:
+              oneOf:
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/FlatActivity'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/FlatActivityEnriched'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/AggregatedActivity'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/AggregatedActivityEnriched'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/NotificationActivity'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/NotificationActivityEnriched'
+            unread:
+              type: number
+            unseen:
+              type: number
+    PersonalizationFeedAPIResponse:
+      allOf:
+        - $ref: '#/components/schemas/APIResponse'
+        - type: object
+          required:
+            - limit
+            - next
+            - offset
+            - results
+            - version
+          properties:
+            limit:
+              type: number
+            next:
+              type: string
+            offset:
+              type: number
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/FlatActivityEnriched'
+            version:
+              type: string
+    GetActivitiesAPIResponse:
+      allOf:
+        - $ref: '#/components/schemas/APIResponse'
+        - type: object
+          required:
+            - results
+          properties:
+            results:
+              oneOf:
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/FlatActivity'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/FlatActivityEnriched'
+
+
+
