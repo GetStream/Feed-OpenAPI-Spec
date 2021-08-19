@@ -1,1 +1,2 @@
 # Stream-Feeds-OpenAPI-Spec
+This is the [OpenAPI 3.0](https://swagger.io/specification/) specification written for the Stream Feeds REST API. The schemas of the API closely follow the Types used in the [TypeScript SDK](https://github.com/GetStream/stream-js/).
