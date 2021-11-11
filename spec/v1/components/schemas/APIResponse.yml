@@ -1,0 +1,115 @@
+APIResponse:
+  properties:
+    duration:
+      type: string
+ErrorAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - detail
+        - status_code
+        - code
+        - exception
+        - more_info
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+        code:
+          type: integer
+        exception:
+          type: string
+        more_info:
+          type: string
+FileUploadAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+RefreshUrlAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+FeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - next
+        - results
+      properties:
+        next:
+          type: string
+        results:
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivityEnriched'
+        unread:
+          type: number
+        unseen:
+          type: number
+PersonalizationFeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - limit
+        - next
+        - offset
+        - results
+        - version
+      properties:
+        limit:
+          type: number
+        next:
+          type: string
+        offset:
+          type: number
+        results:
+          type: array
+          items:
+            $ref: 'Activity.yml#/FlatActivityEnriched'
+        version:
+          type: string
+GetActivitiesAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - results
+      properties:
+        results:
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivityEnriched'

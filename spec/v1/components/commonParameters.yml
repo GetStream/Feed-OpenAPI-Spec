@@ -1,0 +1,28 @@
+api_key:
+  in: query
+  name: api_key
+  required: true
+  schema:
+    type: string
+  description: API Key can be found in your dashboard
+token:
+  in: header
+  name: Authorization
+  required: true
+  schema:
+    type: string
+  description: Your authorization token
+content-type:
+  in: header
+  name: Content-Type
+  required: true
+  schema:
+    type: string
+    enum: [ application/json ]
+auth-type:
+  in: header
+  name: Stream-Auth-Type
+  required: true
+  schema:
+    type: string
+    enum: [ jwt ]

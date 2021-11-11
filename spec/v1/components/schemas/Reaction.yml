@@ -1,0 +1,66 @@
+Reaction:
+  required:
+    - activity_id
+    - created_at
+    - data
+    - id
+    - kind
+    - parent
+    - updated_at
+    - user_id
+  properties:
+    activity_id:
+      type: string
+    created_at:
+      type: string
+    data:
+      type: #T
+    id:
+      type: string
+    kind:
+      type: string
+    parent:
+      type: string
+    updated_at:
+      type: string
+    user_id:
+      type: string
+    target_fields:
+      type: array
+      items:
+        type: string
+    target_fields_extra_data:
+      type: object
+      additionalProperties: true
+EnrichedReaction:
+  allOf:
+    - $ref: '#/Reaction'
+    - type: object
+      required:
+        - children_counts
+        - latest_children
+      properties:
+        children_counts:
+          type: object
+          additionalProperties:
+            type: number
+        latest_children:
+          type: object
+          additionalProperties:
+            type: #ChildReactionType
+        latest_children_extra:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        own_children:
+          type: object
+          additionalProperties:
+            type: #ChildReactionType
+        user:
+          type: #EnrichedUser
+ReactionRecords:
+  type: object
+  additionalProperties:
+    $ref: '#/EnrichedReaction'

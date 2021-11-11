@@ -1,0 +1,84 @@
+parameters:
+  - $ref: '../../components/commonParameters.yml'
+post:
+  description: |
+    Send a JSON encoded list of activities to update. Max len is 100.
+    This is particularly useful when you want to update certain activity
+    metadata used during feed ranking. Activities are updated by `foreign_id`.
+    Changing the original `time` property is not allowed.
+  tags:
+    - Activity
+  requestBody:
+    content:
+      application/json:
+        schema:
+          # I am not sure this is a good schema to use...
+          properties:
+            activities:
+              type: array
+              items:
+                $ref: '../../components/schemas/Activity.yml#/Activity'
+  responses:
+  ## TODO :-)
+get:
+  description: Retrieve specific activities.
+  tags:
+    - Activity
+  parameters:
+    - in: query
+      name: ids
+      required: false
+      schema:
+        type: string
+      description: |
+        A comma separated list of activity IDs. Maximum length is 100.
+    - in: query
+      name: foreign_ids
+      required: false
+      schema:
+        type: string
+      description: |
+        A comma separated list of activity foreign IDs.
+        Maximum length is 100, and must match the length of `timestamps`.
+    - in: query
+      name: timestamps
+      required: false
+      schema:
+        type: string
+      description: |
+        A comma separated list of activity timestamps.
+        Maximum length is 100, and must match the length of `foreign_ids`.
+    - in: query
+      name: withRecentReactions
+      required: false
+      schema:
+        type: string
+      description: |
+        If true activity object will have attribute `latest_reactions`
+        that contains list of recently created reactions
+    - in: query
+      name: recentReactionsLimit
+      required: false
+      schema:
+        type: string
+      description: |
+        Specify number of reactions in the `latest_reactions` attribute,
+        maximum value is 25.
+    - in: query
+      name: withOwnReactions
+      required: false
+      schema:
+        type: string
+      description: |
+        If true activity object will have attribute `own_reactions`
+        that contains list of reactions created by the user himself.
+    - in: query
+      name: withReactionCounts
+      required: false
+      schema:
+        type: string
+      description: |
+        If true activity object will have attribute `reaction_counts`
+        that contains number of reactions for each kind
+  responses:
+  # TODO :-)

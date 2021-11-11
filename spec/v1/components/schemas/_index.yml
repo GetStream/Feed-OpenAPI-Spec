@@ -1,0 +1,53 @@
+#################################################
+# Activities
+#################################################
+BaseActivity:
+  $ref: 'Activity.yml#/BaseActivity'
+NewActivity:
+  $ref: 'Activity.yml#/NewActivity'
+UpdateActivity:
+  $ref: 'Activity.yml#/NewActivity'
+Activity:
+  $ref: 'Activity.yml#/Activity'
+EnrichedActivity:
+  $ref: 'Activity.yml#/EnrichedActivity'
+FlatActivity:
+  $ref: 'Activity.yml#/FlatActivity'
+FlatActivityEnriched:
+  $ref: 'Activity.yml#/FlatActivityEnriched'
+BaseAggregatedActivity:
+  $ref: 'Activity.yml#/BaseAggregatedActivity'
+AggregatedActivity:
+  $ref: 'Activity.yml#/AggregatedActivity'
+AggregatedActivityEnriched:
+  $ref: 'Activity.yml#/AggregatedActivityEnriched'
+BaseNotificationActivity:
+  $ref: 'Activity.yml#/BaseNotificationActivity'
+NotificationActivity:
+  $ref: 'Activity.yml#/NotificationActivity'
+NotificationActivityEnriched:
+  $ref: 'Activity.yml#/NotificationActivityEnriched'
+#################################################
+# Reactions
+#################################################
+Reaction:
+  $ref: 'Reaction.yml#/Reaction'
+EnrichedReaction:
+  $ref: 'Reaction.yml#/EnrichedReaction'
+ReactionRecords:
+  $ref: 'Reaction.yml#/ReactionRecords'
+#################################################
+# API Responses
+#################################################
+APIResponse:
+  $ref: 'APIResponse.yml#/APIResponse'
+FileUploadAPIResponse:
+  $ref: 'APIResponse.yml#/FileUploadAPIResponse'
+RefreshUrlAPIResponse:
+  $ref: 'APIResponse.yml#/RefreshUrlAPIResponse'
+FeedAPIResponse:
+  $ref: 'APIResponse.yml#/FeedAPIResponse'
+PersonalizationFeedAPIResponse:
+  $ref: 'APIResponse.yml#/PersonalizationFeedAPIResponse'
+GetActivitiesAPIResponse:
+  $ref: 'APIResponse.yml#/GetActivitiesAPIResponse'

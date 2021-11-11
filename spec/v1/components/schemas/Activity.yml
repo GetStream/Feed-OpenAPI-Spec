@@ -1,0 +1,170 @@
+BaseActivity:
+  required:
+    - object
+    - verb
+  properties:
+    object:
+      type: string
+    verb:
+      type: string
+    target:
+      type: string
+    to:
+      type: array
+      items:
+        type: string
+NewActivity:
+  allOf:
+    - $ref: '#/BaseActivity'
+    - type: object
+      required:
+        - actor
+      properties:
+        actor:
+          # can also be StringUser type
+          type: string
+        foreign_id:
+          type: string
+        time:
+          type: string
+        AnyValue:
+          description: any custom fields you have
+UpdateActivity:
+  allOf:
+    - $ref: '#/BaseActivity'
+    - type: object
+      required:
+        - actor
+        - foreign_id
+        - time
+      properties:
+        actor:
+          type: string
+        foreign_id:
+          type: string
+        time:
+          type: string
+        AnyValue:
+          description: any custom fields you have
+Activity:
+  allOf:
+    - $ref: '#/BaseActivity'
+    - type: object
+      required:
+        - actor
+        - foreign_id
+        - id
+        - time
+      properties:
+        actor:
+          type: string
+        foreign_id:
+          type: string
+        id:
+          type: string
+        time:
+          type: string
+        analytics:
+          type: string
+          #Record
+        extra_context:
+          type: string
+          #UR
+        origin:
+          type: string
+        score:
+          type: number
+        AnyValue:
+          description: any custom fields you have
+EnrichedActivity:
+  allOf:
+    - $ref: '#/Activity'
+      # need to figure out how to override actor & object
+    - type: object
+      properties:
+        latest_reactions:
+          type:
+        latest_reactions_extra:
+          type:
+        own_reactions:
+          type:
+        own_reactions_extra:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              next:
+                type: string
+        reaction:
+          $ref: 'Reaction.yml#/EnrichedReaction'
+        reaction_counts:
+          type: object
+          additionalProperties:
+            type: number
+FlatActivity:
+  allOf:
+    - $ref: '#/Activity'
+FlatActivityEnriched:
+  allOf:
+    - $ref: '#/EnrichedActivity'
+BaseAggregatedActivity:
+  required:
+    - activity_count
+    - actor_count
+    - created_at
+    - group
+    - id
+    - updated_at
+    - verb
+  properties:
+    activity_count:
+      type: number
+    actor_count:
+      type: number
+    created_at:
+      type: string
+    group:
+      type: string
+    id:
+      type: string
+    updated_at:
+      type: string
+    verb:
+      type: string
+    score:
+      type: number
+AggregatedActivity:
+  allOf:
+    - $ref: '#/BaseAggregatedActivity'
+    - type: object
+      properties:
+        activities:
+          type: array
+          items:
+            $ref: '#/Activity'
+AggregatedActivityEnriched:
+  allOf:
+    - $ref: '#/BaseAggregatedActivity'
+    - type: object
+      properties:
+        activities:
+          type: array
+          items:
+            $ref: '#/EnrichedActivity'
+BaseNotificationActivity:
+  required:
+    - is_read
+    - is_seen
+  properties:
+    is_read:
+      type: boolean
+    is_seen:
+      type: boolean
+NotificationActivity:
+  allOf:
+    - $ref: '#/BaseNotificationActivity'
+    - $ref: '#/AggregatedActivity'
+NotificationActivityEnriched:
+  allOf:
+    - $ref: '#/BaseNotificationActivity'
+    - $ref: '#/AggregatedActivityEnriched'

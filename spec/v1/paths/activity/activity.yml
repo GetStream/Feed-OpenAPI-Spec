@@ -1,0 +1,110 @@
+post:
+  description: |
+    For updating only parts of one or more activities by changing,
+    adding, or removing fields.
+  tags:
+    - Activity
+    - Server-Side Only
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          properties:
+            changes:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: The target activity ID.
+                    type: string
+                  foreign_id:
+                    description: The target activity foreign ID (matched with `time`).
+                    type: string
+                  time:
+                    description: The target activity timestamp (matched with `foreign_id`).
+                    type: string
+                  set:
+                    description: |
+                      An object containing the set operations, where keys are the
+                      target fields and the values are the values to be set.
+                      Maximum 25 top level keys.
+                    type: object
+                    additionalProperties:
+                      type: string
+                  unset:
+                    type: array
+                    items:
+                      type: string
+                    description: |
+                      A list of strings containing the fields to be
+                      removed from the activity. Maximum 25 keys.
+        example:
+          changes:
+            - id: "1a30892b-3e42-11ec-bbba-12e0c51dd22e"
+              set:
+                text: "some text"
+
+  responses:
+    '200':
+      description: 'OK'
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+              - type: object
+                required:
+                  - activities
+                properties:
+                  activities:
+                    type: array
+                    items:
+                      $ref: '../../components/schemas/Activity.yml#/UpdateActivity'
+          example:
+            duration: '3.28ms'
+            activities:
+              - id: '1a30892b-3e42-11ec-bbba-12e0c51dd22e'
+                object: 'some text'
+                origin: null
+                target: ''
+                text: "some text"
+                time: "2021-11-05T14:10:16.979496"
+                verb: 'post'
+                foreign_id: ''
+                actor: 'SU:SmithAnne'
+                attachments:
+                  files: []
+                  images: []
+    '400':
+      description: 'Bad Request'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            "Single ID":
+              value:
+                detail: 'it is not allowed to specify activity IDs with foreign IDs and timestamp parameters in the same request'
+                status_code: 400
+                code: 4
+                exception: "InputException"
+                duration: "0.14ms"
+                more_info: "https://getstream.io/docs/api_error_responses"
+            "Invalid Payload":
+              value:
+                detail: 'Request payload is not valid'
+                status_code: 400
+                code: 4
+                exception: "InputException"
+                duration: "0.14ms"
+                more_info: "https://getstream.io/docs/api_error_responses"
+            "Forbidden Operation":
+              value:
+                detail: 'operation not allowed for field "object"'
+                status_code: 400
+                code: 4
+                exception: "InputException"
+                duration: "0.14ms"
+                more_info: "https://getstream.io/docs/api_error_responses"

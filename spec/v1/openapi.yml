@@ -1,0 +1,31 @@
+openapi: '3.0.2'
+info:
+  title: Stream Activity Feeds
+  contact:
+    name: Stream Support
+    url: https://getstream.io/contact/support/
+    email: support@getstream.io
+  version: '1.0'
+servers:
+  - url: https://api.stream-io-api.com/api/v1.0/
+    description: The standard API server
+  - url: https://{region}-api.stream-io-api.com/api/v1.0
+    description: Regional API servers
+    variables:
+      region:
+        default: us-east
+        enum:
+          - us-east
+          - eu-west
+          - singapore
+          - tokyo
+security:
+  - bearerAuth: []
+  - api_key: []
+paths:
+  $ref: 'paths/_index.yml'
+components:
+  $ref: 'components/_index.yml'
+
+
+

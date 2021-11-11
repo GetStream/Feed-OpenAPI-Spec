@@ -1,0 +1,58 @@
+/activity:
+  $ref: 'activity/activity.yml'
+/activities:
+  $ref: 'activity/activities.yml'
+/enrich/activities:
+  $ref: 'activity/enrich/activities.yml'
+/feed/{feed_slug}/{user_id}:
+  get:
+  post:
+/enrich/feed/{feed_slug}/{user_id}:
+  get:
+  post:
+/feed/{feed_slug}/{user_id}/{activity_id|foreign_id}:
+  delete:
+/feed/{feed_slug}/{user_id}/followers:
+  get:
+/feed/{feed_slug}/{user_id}/follows:
+  get:
+  post:
+/feed/{feed_slug}/{user_id}/following/{target}:
+  delete:
+/feed/add_to_many:
+  post:
+/follow_many:
+  post:
+/reaction:
+  post:
+/reaction/{id}:
+  get:
+  delete:
+  put:
+/reaction/{lookup_addr}/{lookup_value}/{kind}:
+  get:
+/og:
+  get:
+/collections/{collection_name}:
+  post:
+/collections/{collection_name}/{id}:
+  get:
+  put:
+  delete:
+/collections:
+  get:
+  post:
+  delete:
+/files:
+  post:
+  delete:
+/images:
+  get:
+  post:
+  delete:
+/user:
+  post:
+/user/{id}:
+  get:
+  put:
+  delete:
