@@ -1,0 +1,14 @@
+EnrichedUser:
+  required:
+    - id
+  properties:
+    id:
+      type: string
+    created_at:
+      type: string
+    updated_at:
+      type: string
+    data:
+      type: object
+      description: any custom fields you have
+

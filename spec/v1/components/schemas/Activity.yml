@@ -3,10 +3,12 @@ BaseActivity:
     - object
     - verb
   properties:
-    object:
-      type: string
     verb:
       type: string
+    object:
+      oneOf:
+        - type: string
+        - type: object
     target:
       type: string
     to:
@@ -21,8 +23,10 @@ NewActivity:
         - actor
       properties:
         actor:
-          # can also be StringUser type
-          type: string
+          oneOf:
+            - $ref: 'User.yml#/EnrichedUser'
+            # can also be StringUser type
+            - type: string
         foreign_id:
           type: string
         time:
@@ -39,12 +43,17 @@ UpdateActivity:
         - time
       properties:
         actor:
-          type: string
+          oneOf:
+          - type: string
+          - $ref: 'User.yml#/EnrichedUser'
         foreign_id:
           type: string
         time:
           type: string
         AnyValue:
+          oneOf:
+            - type: string
+            - type: object
           description: any custom fields you have
 Activity:
   allOf:
@@ -65,10 +74,10 @@ Activity:
         time:
           type: string
         analytics:
-          type: string
+          type: object
           #Record
         extra_context:
-          type: string
+          type: object
           #UR
         origin:
           type: string

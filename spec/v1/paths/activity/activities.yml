@@ -1,5 +1,3 @@
-parameters:
-  - $ref: '../../components/commonParameters.yml'
 post:
   description: |
     Send a JSON encoded list of activities to update. Max len is 100.
@@ -7,19 +5,67 @@ post:
     metadata used during feed ranking. Activities are updated by `foreign_id`.
     Changing the original `time` property is not allowed.
   tags:
-    - Activity
+    - '[Server-Side Only] Activity'
   requestBody:
     content:
       application/json:
         schema:
-          # I am not sure this is a good schema to use...
           properties:
             activities:
               type: array
               items:
-                $ref: '../../components/schemas/Activity.yml#/Activity'
+                $ref: '../../components/schemas/Activity.yml#/UpdateActivity'
+        examples:
+          "Minimum Payload":
+            value:
+              $ref: '../../components/examples/Activity.yml#/MinimumActivityPayload'
+          "Custom Values Payload":
+            value:
+              $ref: '../../components/examples/Activity.yml#/CustomActivityPayload'
+          "Custom Values Payload W/ Enriched User":
+            value:
+              $ref: '../../components/examples/Activity.yml#/CustomActivityPayloadWithEnrichedUser'
   responses:
-  ## TODO :-)
+    '200':
+      description: 'OK'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            $ref: '../../components/examples/APIResponse.yml#/APIResponse'
+    '400':
+      description: 'Bad Request'
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+              - $ref: '../../components/schemas/APIResponse.yml#/FieldsErrorAPIResponse'
+          examples:
+            "Payload Missing Required Field foreign_id":
+              description: 'Omitted field `foreign_id` from the payload'
+              value:
+                detail: "The activity.foreign_id field is required"
+                status_code: 400
+                code: 4
+                exception: "InputException"
+                duration: "0.16ms"
+                more_info: "https://getstream.io/docs/api_error_responses"
+            "Payload Missing Required Field":
+              description: 'Omitted field `verb` from the payload'
+              value:
+                detail: "Errors for fields 'verb'"
+                status_code: 400
+                code: 4
+                exception: "InputException"
+                exception_fields:
+                  verb:
+                    - "verb is a required field"
+                duration: "0.16ms"
+                more_info: "https://getstream.io/docs/api_error_responses"
+    '403':
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
 get:
   description: Retrieve specific activities.
   tags:

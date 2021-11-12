@@ -23,6 +23,12 @@ ErrorAPIResponse:
           type: string
         more_info:
           type: string
+FieldsErrorAPIResponse:
+  allOf:
+    - $ref: '#/ErrorAPIResponse'
+    - exception_fields:
+        type: object
+        description: 'Keys are field names. Values are arrays of error strings.'
 FileUploadAPIResponse:
   allOf:
     - $ref: '#/APIResponse'

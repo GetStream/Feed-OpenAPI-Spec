@@ -1,0 +1,15 @@
+EnrichedUser:
+  id: "SmithAnne"
+  created_at: "2021-10-07T11:18:29.562418Z"
+  updated_at: "2021-11-10T18:02:59.656238Z"
+  data:
+    "handle": "SmithAnne"
+    "joined": "2021-10-30T22:00:00.000Z"
+    "name": "Anne Smith"
+    "about": "This is the profile summary for Anne Smith"
+    "profileImage": "https://us-east.stream-io-cdn.com/1145265/images/3d9eb1a3-57bf-44d9-b6a3-4ac12e75e8d0.graphql_logo.png?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzNkOWViMWEzLTU3YmYtNDRkOS1iNmEzLTRhYzEyZTc1ZThkMC5ncmFwaHFsX2xvZ28ucG5nP2Nyb3A9KiZkbD1ncmFwaHFsX2xvZ28ucG5nJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzNzkxNTMzOX19fV19&Signature=oQuwhY1nKbRq9MRL96~ZEcMp6Yh7nJzIdhFbt~FgbJzgukxc4lg3UtYM8c~g3UqsfbXsasEyElTqsYthb289A5jBk3KLN1lVGVi25FOH9e6zRuXE2nbjqOWhpEKyOClcURD8~PkqUdkMRDZnXn9EQENleaWq9coEt8~QF9wPvcuukboxCqb41RPGPndjJiNYjHf8fGh4pih56sbARUIIJZTuDC~ZCVA63aNpeq3l9IshLCAyg~i9gaxXs5NYELZORV35y1wlnlmCO4Xxz-NzpxdC4XhZUkC~gYfrjxujlrpcb6h~meriNNxzoIaiC-YpYzZQugtxaA04G6hVI-3lFA__&crop=*&dl=graphql_logo.png&h=*&resize=*&ro=0&w=*"
+    "last_name": "Smith"
+    "first_name": "Anne"
+    "website": null
+    "id": "654ccfa3-4dff-4e0e-bb00-a7306566f69c"
+    "email": "anne.smith@email.com"

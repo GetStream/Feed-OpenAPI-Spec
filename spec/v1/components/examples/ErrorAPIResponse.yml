@@ -1,0 +1,16 @@
+Forbidden:
+  description: 'Forbidden'
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/APIResponse.yml#/ErrorAPIResponse'
+      examples:
+        'Server-Only Access':
+          summary: ''
+          value:
+            detail: "This endpoint cannot be accessed with user authentication"
+            status_code: 403
+            code: 17
+            exception: "NotAllowedException"
+            duration: "0.00ms"
+            more_info: "https://getstream.io/docs/api_error_responses"

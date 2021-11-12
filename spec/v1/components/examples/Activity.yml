@@ -1,0 +1,23 @@
+MinimumActivityPayload:
+  foreign_id: "569c291a-43a7-11ec-a4d2-a4bb6d26ac2f"
+  time: "2021-10-21T22:00:04.720727"
+  object: "abcdef"
+  actor: "SmithAnne"
+  verb: "post"
+CustomActivityPayload:
+  $ref: "#/MinimumActivityPayload"
+  id: "3f324361-32ba-11ec-95fa-12e0c51dd22e"
+  origin: "user:SmithAnne"
+  text: "abcdef"
+  target: ""
+  attachments:
+    files: [ ]
+    images: [ ]
+CustomActivityPayloadWithEnrichedUser:
+  $ref: "#/CustomActivityPayload"
+  actor:
+    $ref: 'User.yml#/EnrichedUser'
+CustomActivityPayloadChangeEnrichedUserData:
+  $ref: "#/CustomActivityPayload"
+  actor:
+    $ref: 'User.yml#/EnrichedUser'
