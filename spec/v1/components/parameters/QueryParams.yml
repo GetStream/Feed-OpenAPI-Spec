@@ -1,0 +1,77 @@
+GetActivitiesOptions:
+  ids:
+    in: query
+    name: ids
+    required: false
+    schema:
+      type: array
+      maxItems: 100
+      items:
+        type: string
+    style: form
+    explode: false
+    description: |
+      A comma separated list of activity IDs. Maximum length is 100.
+  foreign_ids:
+    in: query
+    name: foreign_ids
+    required: false
+    schema:
+      type: array
+      maxItems: 100
+      items:
+        type: string
+    description: |
+      A comma separated list of activity foreign IDs.
+      Maximum length is 100, and must match the length of `timestamps`.
+  timestamps:
+    in: query
+    name: timestamps
+    required: false
+    schema:
+      type: array
+      maxItems: 100
+      items:
+        type: string
+    description: |
+      A comma separated list of activity timestamps.
+      Maximum length is 100, and must match the length of `foreign_ids`.
+
+EnrichActivityOptions:
+  withRecentReactions:
+    in: query
+    name: withRecentReactions
+    required: false
+    schema:
+      type: boolean
+    description: |
+      If true activity object will have attribute `latest_reactions`
+      that contains list of recently created reactions
+  recentReactionsLimit:
+    in: query
+    name: recentReactionsLimit
+    required: false
+    schema:
+      type: integer
+      maximum: 25
+    description: |
+      Specify number of reactions in the `latest_reactions` attribute,
+      maximum value is 25.
+  withOwnReactions:
+    in: query
+    name: withOwnReactions
+    required: false
+    schema:
+      type: boolean
+    description: |
+      If true activity object will have attribute `own_reactions`
+      that contains list of reactions created by the user himself.
+  withReactionCounts:
+    in: query
+    name: withReactionCounts
+    required: false
+    schema:
+      type: boolean
+    description: |
+      If true activity object will have attribute `reaction_counts`
+      that contains number of reactions for each kind

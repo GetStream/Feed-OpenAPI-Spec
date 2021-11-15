@@ -1,2 +1,16 @@
 APIResponse:
   duration: '3.28ms'
+  required: true
+GetActivitiesAPIResponse:
+  allOf:
+    - $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+    - type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              anyOf:
+                - $ref: 'Activity.yml#/FlatActivity'
+                - $ref: 'Activity.yml#/FlatActivityEnriched'

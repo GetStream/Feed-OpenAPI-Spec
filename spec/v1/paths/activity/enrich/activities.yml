@@ -1,62 +1,36 @@
 get:
-  description: Retrieve specific (enriched) activities.
+  description: 'Retrieve specific **enriched** activities. One of the following is required: param `ids` OR params `foreign_ids` & `timestamps`.'
   tags:
     - Activity
   parameters:
-    - in: query
-      name: ids
-      required: false
-      schema:
-        type: string
-      description: |
-        A comma separated list of activity IDs. Maximum length is 100.
-    - in: query
-      name: foreign_ids
-      required: false
-      schema:
-        type: string
-      description: |
-        A comma separated list of activity foreign IDs.
-        Maximum length is 100, and must match the length of `timestamps`.
-    - in: query
-      name: timestamps
-      required: false
-      schema:
-        type: string
-      description: |
-        A comma separated list of activity timestamps.
-        Maximum length is 100, and must match the length of `foreign_ids`.
-    - in: query
-      name: withRecentReactions
-      required: false
-      schema:
-        type: string
-      description: |
-        If true activity object will have attribute `latest_reactions`
-        that contains list of recently created reactions
-    - in: query
-      name: recentReactionsLimit
-      required: false
-      schema:
-        type: string
-      description: |
-        Specify number of reactions in the `latest_reactions` attribute,
-        maximum value is 25.
-    - in: query
-      name: withOwnReactions
-      required: false
-      schema:
-        type: string
-      description: |
-        If true activity object will have attribute `own_reactions`
-        that contains list of reactions created by the user himself.
-    - in: query
-      name: withReactionCounts
-      required: false
-      schema:
-        type: string
-      description: |
-        If true activity object will have attribute `reaction_counts`
-        that contains number of reactions for each kind
+    - $ref: '../../../components/parameters/QueryParams.yml#/GetActivitiesOptions/ids'
+    - $ref: '../../../components/parameters/QueryParams.yml#/GetActivitiesOptions/foreign_ids'
+    - $ref: '../../../components/parameters/QueryParams.yml#/GetActivitiesOptions/timestamps'
+    - $ref: '../../../components/parameters/QueryParams.yml#/EnrichActivityOptions/withRecentReactions'
+    - $ref: '../../../components/parameters/QueryParams.yml#/EnrichActivityOptions/recentReactionsLimit'
+    - $ref: '../../../components/parameters/QueryParams.yml#/EnrichActivityOptions/withOwnReactions'
+    - $ref: '../../../components/parameters/QueryParams.yml#/EnrichActivityOptions/withReactionCounts'
   responses:
-  # TODO
+    '200':
+      description: 'OK'
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/GetActivitiesAPIResponse'
+          examples:
+            Enriched User Only:
+              description: |
+                Queried only by array of ids or (foreign_ids + timestamps).
+                Returns Activity object with User type data
+              value:
+                duration: "1.16ms"
+                results:
+                  - $ref: '../../../components/examples/Activity.yml#/CustomActivityPayloadWithEnrichedUser'
+            With Reactions & Enriched User:
+              description: |
+                Queried with `withRecentReactions=true` and `withOwnReactions=true`.
+                Returns Activity object with User type data and information about the activity reactions.
+              value:
+                duration: "1.16ms"
+                results:
+                  - $ref: '../../../components/examples/Activity.yml#/CustomActivityPayloadWithEnrichedUserAndReactions'

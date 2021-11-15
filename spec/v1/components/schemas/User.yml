@@ -1,4 +1,5 @@
 EnrichedUser:
+  type: object
   required:
     - id
   properties:
@@ -6,8 +7,10 @@ EnrichedUser:
       type: string
     created_at:
       type: string
+      format: date-time
     updated_at:
       type: string
+      format: date-time
     data:
       type: object
       description: any custom fields you have

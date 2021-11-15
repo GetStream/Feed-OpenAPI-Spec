@@ -67,64 +67,44 @@ post:
     '403':
       $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
 get:
-  description: Retrieve specific activities.
+  description: 'Retrieve specific **non-enriched** activities. One of the following is required: param `ids` OR params `foreign_ids` & `timestamps`.'
   tags:
     - Activity
   parameters:
-    - in: query
-      name: ids
-      required: false
-      schema:
-        type: string
-      description: |
-        A comma separated list of activity IDs. Maximum length is 100.
-    - in: query
-      name: foreign_ids
-      required: false
-      schema:
-        type: string
-      description: |
-        A comma separated list of activity foreign IDs.
-        Maximum length is 100, and must match the length of `timestamps`.
-    - in: query
-      name: timestamps
-      required: false
-      schema:
-        type: string
-      description: |
-        A comma separated list of activity timestamps.
-        Maximum length is 100, and must match the length of `foreign_ids`.
-    - in: query
-      name: withRecentReactions
-      required: false
-      schema:
-        type: string
-      description: |
-        If true activity object will have attribute `latest_reactions`
-        that contains list of recently created reactions
-    - in: query
-      name: recentReactionsLimit
-      required: false
-      schema:
-        type: string
-      description: |
-        Specify number of reactions in the `latest_reactions` attribute,
-        maximum value is 25.
-    - in: query
-      name: withOwnReactions
-      required: false
-      schema:
-        type: string
-      description: |
-        If true activity object will have attribute `own_reactions`
-        that contains list of reactions created by the user himself.
-    - in: query
-      name: withReactionCounts
-      required: false
-      schema:
-        type: string
-      description: |
-        If true activity object will have attribute `reaction_counts`
-        that contains number of reactions for each kind
+    - $ref: '../../components/parameters/QueryParams.yml#/GetActivitiesOptions/ids'
+    - $ref: '../../components/parameters/QueryParams.yml#/GetActivitiesOptions/foreign_ids'
+    - $ref: '../../components/parameters/QueryParams.yml#/GetActivitiesOptions/timestamps'
   responses:
-  # TODO :-)
+    '200':
+      description: 'OK'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/GetActivitiesAPIResponse'
+          example:
+            duration: "1.16ms"
+            results:
+              - actor: "SU:SmithAnne"
+                attachments:
+                  files: []
+                  images: []
+                foreign_id: "bf4b4534-43f4-11ec-8190-a4bb6d26ac2f"
+                id: "3f324361-32ba-11ec-95fa-12e0c51dd22e"
+                object: "abc"
+                origin: null
+                target: ""
+                text: "abc"
+                time: "2021-10-21T22:00:04.720727"
+                verb: "post"
+              - actor: "SU:SmithAnne"
+                attachments:
+                  files: []
+                  images: []
+                foreign_id: "cf7364aa-43f4-11ec-9b24-a4bb6d26ac2f"
+                id: "0cc3a2bf-3e32-11ec-b3f6-0ac74274a1c1"
+                object: "aa"
+                origin: null
+                target: ""
+                text: "aa"
+                time: "2021-11-05T12:15:22.507744"
+                verb: "post"
