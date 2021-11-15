@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --watch server --watch build",
-    "spec:build": "swagger-cli bundle spec/v1/openapi.yml --outfile build/openapi.yml --type yaml"
+    "spec:build": "swagger-cli bundle --dereference spec/v1/openapi.yml --outfile build/openapi.yml --type yaml"
   },
   "dependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
