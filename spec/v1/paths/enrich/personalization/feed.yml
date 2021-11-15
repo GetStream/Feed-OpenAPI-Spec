@@ -1,0 +1,46 @@
+get:
+  description: 'The `user_id` query parameter has to be provided if the JWT does not contain `user_id` claim.'
+  tags:
+    - Feed
+  parameters:
+    - $ref: '../../../components/queryParameters/_index.yml#/FeedContextOptions/user_id'
+    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/withRecentReactions'
+    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/recentReactionsLimit'
+    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/withOwnReactions'
+    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/withReactionCounts'
+    - $ref: '../../../components/queryParameters/_index.yml#/RankedFeedOptions/offset'
+    - $ref: '../../../components/queryParameters/_index.yml#/RankedFeedOptions/ranking'
+    - $ref: '../../../components/queryParameters/_index.yml#/RankedFeedOptions/session'
+    - $ref: '../../../components/queryParameters/_index.yml#/NotificationFeedOptions/mark_read'
+    - $ref: '../../../components/queryParameters/_index.yml#/NotificationFeedOptions/mark_seen'
+  responses:
+    '200':
+      summary: OK
+      description: Returns a list of activities for a given feed.
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/PersonalizationFeedAPIResponse'
+          examples:
+            No URL Query Params:
+              value:
+                $ref: '../../../components/examples/APIResponse.yml#/PersonalizationFeedAPIResponse'
+            With Enrich Options:
+              description: Example showing only the first item of the `results` array
+              value:
+                $ref: '../../../components/examples/APIResponse.yml#/PersonalizationFeedAPIResponseEnriched'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Missing user_id:
+              value:
+                detail: "The parameter 'user_id' is required for this endpoint."
+                status_code: 400
+                code: 0
+                exception: ""
+                duration: "55.14ms"
+                more_info: "https://getstream.io/docs/api_error_responses"

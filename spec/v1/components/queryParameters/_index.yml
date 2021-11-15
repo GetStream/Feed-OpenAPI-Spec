@@ -37,7 +37,7 @@ GetActivitiesOptions:
       A comma separated list of activity timestamps.
       Maximum length is 100, and must match the length of `foreign_ids`.
 
-EnrichActivityOptions:
+EnrichOptions:
   withRecentReactions:
     in: query
     name: withRecentReactions
@@ -75,3 +75,64 @@ EnrichActivityOptions:
     description: |
       If true activity object will have attribute `reaction_counts`
       that contains number of reactions for each kind
+RankedFeedOptions:
+  offset:
+    in: query
+    name: 'offset'
+    required: false
+    schema:
+      type: integer
+    description: 'TODO description'
+  ranking:
+    in: query
+    name: 'ranking'
+    required: false
+    schema:
+      type: string
+    description: 'TODO description'
+  session:
+    in: query
+    name: 'session'
+    required: false
+    schema:
+      type: string
+    description: 'TODO description'
+NotificationFeedOptions:
+  mark_read:
+    in: query
+    name: mark_read
+    required: false
+    schema:
+      oneOf:
+        - type: boolean
+        - type: string
+          enum: [ current ]
+        - type: array
+          items:
+            type: string
+    description: 'Possible values are boolean (true / false), array of strings or string "current".'
+  mark_seen:
+    in: query
+    name: mark_seen
+    required: false
+    schema:
+      oneOf:
+        - type: boolean
+        - type: string
+          enum: [ current ]
+        - type: array
+          items:
+            type: string
+    description: 'Possible values are boolean (true / false), array of strings or string "current".'
+FeedContextOptions:
+  user_id:
+    in: query
+    name: user_id
+    required: false
+    schema:
+      type: string
+    description: |
+      Provide `user_id` to retrieve information related to the given user only.
+      For example activity object with the key `own_reactions` would list only
+      reactions created by the user with the given `user_id`. Is required if the JWT
+      does not include `user_id` claim.

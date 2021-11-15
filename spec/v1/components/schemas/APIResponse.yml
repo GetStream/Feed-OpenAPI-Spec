@@ -29,6 +29,27 @@ FieldsErrorAPIResponse:
     - exception_fields:
         type: object
         description: 'Keys are field names. Values are arrays of error strings.'
+PaginatedFeedAPIResponse:
+  type: object
+  required:
+    - limit
+    - next
+    - offset
+    - results
+    - version
+  properties:
+    limit:
+      type: number
+    next:
+      type: string
+    offset:
+      type: number
+    results:
+      type: array
+      items:
+        $ref: 'Activity.yml#/FlatActivityEnriched'
+    version:
+      type: string
 FileUploadAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
@@ -84,26 +105,7 @@ FeedAPIResponse:
 PersonalizationFeedAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
-    - type: object
-      required:
-        - limit
-        - next
-        - offset
-        - results
-        - version
-      properties:
-        limit:
-          type: number
-        next:
-          type: string
-        offset:
-          type: number
-        results:
-          type: array
-          items:
-            $ref: 'Activity.yml#/FlatActivityEnriched'
-        version:
-          type: string
+    - $ref: '#/PaginatedFeedAPIResponse'
 GetActivitiesAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
