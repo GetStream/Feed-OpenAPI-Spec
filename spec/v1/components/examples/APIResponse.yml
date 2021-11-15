@@ -1,9 +1,8 @@
 APIResponse:
   duration: '3.28ms'
-  required: true
 GetActivitiesAPIResponse:
   allOf:
-    - $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+    - $ref: '#/APIResponse'
     - type: object
       properties:
         results:
@@ -14,3 +13,7 @@ GetActivitiesAPIResponse:
               anyOf:
                 - $ref: 'Activity.yml#/FlatActivity'
                 - $ref: 'Activity.yml#/FlatActivityEnriched'
+OGAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Og.yml#/OGData'

@@ -119,3 +119,7 @@ GetActivitiesAPIResponse:
             - type: array
               items:
                 $ref: 'Activity.yml#/FlatActivityEnriched'
+OGAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Og.yml#/OGData'

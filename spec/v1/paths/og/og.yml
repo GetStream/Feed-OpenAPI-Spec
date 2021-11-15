@@ -1,0 +1,33 @@
+get:
+  description: This endpoint allows you to retrieve open graph information from a URL which you can then use to add images and a description to activities
+  tags:
+    - Open Graph
+  parameters:
+    - in: query
+      name: url
+      required: true
+      schema:
+        type: string
+      description: URL of the resource you want to scrape.
+  responses:
+    '200':
+      description: 'OK'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/OGAPIResponse'
+          example:
+            $ref: '../../components/examples/APIResponse.yml#/OGAPIResponse'
+    '400':
+      description: 'Bad Request'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          example:
+            detail: "couldn't find og data for the provided url"
+            status_code: 400
+            code: 4
+            exception: "InputException"
+            duration: "11.42ms"
+            more_info: "https://getstream.io/docs/api_error_responses"
