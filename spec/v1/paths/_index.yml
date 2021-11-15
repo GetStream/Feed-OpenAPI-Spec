@@ -3,13 +3,15 @@
 /activities:
   $ref: 'activity/activities.yml'
 /enrich/activities:
-  $ref: 'activity/enrich/activities.yml'
+  $ref: 'enrich/activities.yml'
 /feed/{feed_slug}/{user_id}:
   get:
   post:
 /enrich/feed/{feed_slug}/{user_id}:
   get:
   post:
+/enrich/personalization/feed/:
+  $ref: 'enrich/personalization/feed.yml'
 /feed/{feed_slug}/{user_id}/{activity_id|foreign_id}:
   delete:
 /feed/{feed_slug}/{user_id}/followers:
@@ -20,6 +22,8 @@
 /feed/{feed_slug}/{user_id}/following/{target}:
   delete:
 /feed/add_to_many:
+  post:
+/feed_targets/{feedUrl}/activity_to_targets:
   post:
 /follow_many:
   post:
@@ -32,7 +36,7 @@
 /reaction/{lookup_addr}/{lookup_value}/{kind}:
   get:
 /og:
-  get:
+  $ref: 'og/og.yml'
 /collections/{collection_name}:
   post:
 /collections/{collection_name}/{id}:
