@@ -1,53 +1,3 @@
-parameters:
-  - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
-  - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'
-  - $ref: '../../../components/parameters/common.yml#/x-stream-client'
-  - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
-post:
-  descrition: |
-    'Create an activity in a given feed'
-  tags:
-    - Feed
-  requestBody:
-    content:
-      application/json:
-        schema:
-          properties:
-            $ref: '../../../components/schemas/Activity.yml#/NewActivity'
-        example:
-          $ref: '../../../components/examples/Activity.yml#/NewActivityPayload'
-  responses:
-    '200':
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '../../../components/schemas/APIResponse.yml#/PostActivityAPIResponse'
-          example:
-            $ref: '../../../components/examples/Activity.yml#/NewActivityResponseData'
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '../../../components/schemas/APIResponse.yml#/FieldsErrorAPIResponse'
-          example:
-            detail: Errors for fields 'actor', 'verb', 'object'
-            status_code: 400
-            code: 4
-            exception: InputException
-            exception_fields:
-              actor:
-                - actor is a required field
-              object:
-                - object is a required field
-              verb:
-                - verb is a required field
-            duration: 0.18ms
-            more_info: https://getstream.io/docs/api_error_responses
-    '403':
-      $ref: '../../../components/examples/ErrorAPIResponse.yml#/ForbiddenInsufficientPermissions'
-
 get:
   descrition: |
     ''
@@ -55,6 +5,10 @@ get:
     - Feed
   parameters:
 #    - $ref: '../../../components/parameters/_index.yml#/FeedContextOptions/user_id'
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'
+    - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
     - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withRecentReactions'
     - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/recentReactionsLimit'
     - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withOwnReactions'

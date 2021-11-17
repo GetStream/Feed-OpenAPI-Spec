@@ -5,9 +5,9 @@
 /enrich/activities:
   $ref: 'enrich/activities.yml'
 /feed/{feed_slug}/{user_id}/:
-  $ref: 'feed/feed.yml'
+  $ref: 'feed/feed_slug__user_id.yml'
 /enrich/feed/{feed_slug}/{user_id}:
-  $ref: 'enrich/feed/feed.yml'
+  $ref: 'enrich/feed/feed_slug__user_id.yml'
 /enrich/personalization/feed/:
   $ref: 'enrich/personalization/feed.yml'
 /feed/{feed_slug}/{user_id}/{activity_id|foreign_id}:
