@@ -1,6 +1,6 @@
 securitySchemes:
   $ref: 'securitySchemes.yml'
 parameters:
-  $ref: 'queryParameters/common.yml'
+  $ref: 'parameters/common.yml'
 schemas:
   $ref: 'schemas/_index.yml'

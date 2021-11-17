@@ -1,0 +1,15 @@
+FeedPathParameters:
+  feed_slug:
+    in: path
+    name: feed_slug
+    required: true
+    schema:
+      type: string
+    description: 'The feed type, e.g."user" or "timeline" etc. The first part of the feed id before the semicolon.'
+  user_id:
+    in: path
+    name: user_id
+    required: true
+    schema:
+      type: string
+    description: 'The second part of the feed id after the semicolon.'

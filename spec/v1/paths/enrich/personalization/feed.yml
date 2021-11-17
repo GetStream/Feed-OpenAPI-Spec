@@ -3,19 +3,23 @@ get:
   tags:
     - Feed
   parameters:
-
-    - $ref: '../../../components/queryParameters/_index.yml#/FeedContextOptions/user_id'
-    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/withRecentReactions'
-    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/recentReactionsLimit'
-    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/withOwnReactions'
-    - $ref: '../../../components/queryParameters/_index.yml#/EnrichOptions/withReactionCounts'
-    - $ref: '../../../components/queryParameters/_index.yml#/RankedFeedOptions/offset'
-    - $ref: '../../../components/queryParameters/_index.yml#/RankedFeedOptions/ranking'
-    - $ref: '../../../components/queryParameters/_index.yml#/RankedFeedOptions/session'
-    - $ref: '../../../components/queryParameters/_index.yml#/NotificationFeedOptions/mark_read'
-    - $ref: '../../../components/queryParameters/_index.yml#/NotificationFeedOptions/mark_seen'
-    - $ref: '../../../components/queryParameters/common.yml#/x-stream-client'
-    - $ref: '../../../components/queryParameters/common.yml#/stream-auth-type'
+    - $ref: '../../../components/parameters/_index.yml#/FeedContextOptions/user_id'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_gt'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_gte'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_lt'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_lte'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/limit'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withRecentReactions'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/recentReactionsLimit'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withOwnReactions'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withReactionCounts'
+    - $ref: '../../../components/parameters/_index.yml#/RankedFeedOptions/offset'
+    - $ref: '../../../components/parameters/_index.yml#/RankedFeedOptions/ranking'
+    - $ref: '../../../components/parameters/_index.yml#/RankedFeedOptions/session'
+    - $ref: '../../../components/parameters/_index.yml#/NotificationFeedOptions/mark_read'
+    - $ref: '../../../components/parameters/_index.yml#/NotificationFeedOptions/mark_seen'
+    - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
   responses:
     '200':
       summary: OK

@@ -36,7 +36,45 @@ GetActivitiesOptions:
     description: |
       A comma separated list of activity timestamps.
       Maximum length is 100, and must match the length of `foreign_ids`.
-
+FeedPaginationOptions:
+  id_gt:
+    in: query
+    name: id_gt
+    required: false
+    schema:
+      type: string
+    description: Filter activities created **later** than the activity with the given `id`.
+  id_gte:
+    in: query
+    name: id_gte
+    required: false
+    schema:
+      type: string
+    description: Filter activities created **later** than and including the activity with the given `id`.
+  id_lt:
+    in: query
+    name: id_lt
+    required: false
+    schema:
+      type: string
+    description: Filter activities created **sooner** than the activity with the given `id`.
+  id_lte:
+    in: query
+    name: id_lte
+    required: false
+    schema:
+      type: string
+    description: |
+      Filter activities created **sooner** than and including the activity with the given `id`.
+  limit:
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: number
+    description: |
+      The returned array will contain this many items.
+      If not specified, resulting array will contain 25 items.
 EnrichOptions:
   withRecentReactions:
     in: query
@@ -110,7 +148,7 @@ NotificationFeedOptions:
         - type: array
           items:
             type: string
-    description: 'Possible values are boolean (true / false), array of strings or string "current".'
+    description: 'Notification feed option. Possible values are boolean (true / false), array of strings or string "current".'
   mark_seen:
     in: query
     name: mark_seen
@@ -123,7 +161,7 @@ NotificationFeedOptions:
         - type: array
           items:
             type: string
-    description: 'Possible values are boolean (true / false), array of strings or string "current".'
+    description: 'Notification feed option. Possible values are boolean (true / false), array of strings or string "current".'
 FeedContextOptions:
   user_id:
     in: query

@@ -3,15 +3,15 @@ get:
   tags:
     - Activity
   parameters:
-    - $ref: '../../components/queryParameters/_index.yml#/GetActivitiesOptions/ids'
-    - $ref: '../../components/queryParameters/_index.yml#/GetActivitiesOptions/foreign_ids'
-    - $ref: '../../components/queryParameters/_index.yml#/GetActivitiesOptions/timestamps'
-    - $ref: '../../components/queryParameters/_index.yml#/EnrichOptions/withRecentReactions'
-    - $ref: '../../components/queryParameters/_index.yml#/EnrichOptions/recentReactionsLimit'
-    - $ref: '../../components/queryParameters/_index.yml#/EnrichOptions/withOwnReactions'
-    - $ref: '../../components/queryParameters/_index.yml#/EnrichOptions/withReactionCounts'
-    - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
-    - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
+    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/ids'
+    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/foreign_ids'
+    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/timestamps'
+    - $ref: '../../components/parameters/_index.yml#/EnrichOptions/withRecentReactions'
+    - $ref: '../../components/parameters/_index.yml#/EnrichOptions/recentReactionsLimit'
+    - $ref: '../../components/parameters/_index.yml#/EnrichOptions/withOwnReactions'
+    - $ref: '../../components/parameters/_index.yml#/EnrichOptions/withReactionCounts'
+    - $ref: '../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../components/parameters/common.yml#/stream-auth-type'
   responses:
     '200':
       description: 'OK'

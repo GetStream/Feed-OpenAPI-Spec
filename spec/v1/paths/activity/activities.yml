@@ -1,6 +1,6 @@
 parameters:
-  - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
-  - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
 post:
   description: |
     Send a JSON encoded list of activities to update. Max len is 100.
@@ -74,9 +74,9 @@ get:
   tags:
     - Activity
   parameters:
-    - $ref: '../../components/queryParameters/_index.yml#/GetActivitiesOptions/ids'
-    - $ref: '../../components/queryParameters/_index.yml#/GetActivitiesOptions/foreign_ids'
-    - $ref: '../../components/queryParameters/_index.yml#/GetActivitiesOptions/timestamps'
+    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/ids'
+    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/foreign_ids'
+    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/timestamps'
   responses:
     '200':
       description: 'OK'

@@ -68,7 +68,7 @@ RefreshUrlAPIResponse:
       properties:
         url:
           type: string
-FlatActivityFeedAPIResponse:
+NotEnrichedActivityFeedAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
     - type: object
@@ -79,9 +79,37 @@ FlatActivityFeedAPIResponse:
         next:
           type: string
         results:
-          type: array
-          items:
-            $ref: 'Activity.yml#/FlatActivity'
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivity'
+EnrichedActivityFeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - next
+        - results
+      properties:
+        next:
+          type: string
+        results:
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivityEnriched'
 FeedAPIResponse:
   allOf:
     - $ref: '#/APIResponse'

@@ -1,0 +1,382 @@
+parameters:
+  - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+  - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'
+  - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
+post:
+  descrition: |
+    'Create an activity in a given feed'
+  tags:
+    - Feed
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            $ref: '../../../components/schemas/Activity.yml#/NewActivity'
+        example:
+          $ref: '../../../components/examples/Activity.yml#/NewActivityPayload'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/PostActivityAPIResponse'
+          example:
+            $ref: '../../../components/examples/Activity.yml#/NewActivityResponseData'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/FieldsErrorAPIResponse'
+          example:
+            detail: Errors for fields 'actor', 'verb', 'object'
+            status_code: 400
+            code: 4
+            exception: InputException
+            exception_fields:
+              actor:
+                - actor is a required field
+              object:
+                - object is a required field
+              verb:
+                - verb is a required field
+            duration: 0.18ms
+            more_info: https://getstream.io/docs/api_error_responses
+    '403':
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/ForbiddenInsufficientPermissions'
+
+get:
+  descrition: |
+    ''
+  tags:
+    - Feed
+  parameters:
+#    - $ref: '../../../components/parameters/_index.yml#/FeedContextOptions/user_id'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withRecentReactions'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/recentReactionsLimit'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withOwnReactions'
+    - $ref: '../../../components/parameters/_index.yml#/EnrichOptions/withReactionCounts'
+    - $ref: '../../../components/parameters/_index.yml#/RankedFeedOptions/offset'
+    - $ref: '../../../components/parameters/_index.yml#/RankedFeedOptions/ranking'
+    - $ref: '../../../components/parameters/_index.yml#/RankedFeedOptions/session'
+    - $ref: '../../../components/parameters/_index.yml#/NotificationFeedOptions/mark_read'
+    - $ref: '../../../components/parameters/_index.yml#/NotificationFeedOptions/mark_seen'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_gt'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_gte'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_lt'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/id_lte'
+    - $ref: '../../../components/parameters/_index.yml#/FeedPaginationOptions/limit'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/EnrichedActivityFeedAPIResponse'
+          example:
+            next: /api/v1.0/enrich/feed/user/SmithAnne?api_key=wtdczaj8nwc7&id_gt=69e64d7c-46f1-11ec-b781-12e0c51dd22e&limit=25
+            duration: 184.90ms
+            results:
+              - actor:
+                  created_at: '2021-10-07T11:18:29.562418Z'
+                  updated_at: '2021-11-16T14:40:48.165830Z'
+                  id: SmithAnne
+                  data:
+                    about: abcde
+                    banner_url: null
+                    email: anne.smith@email.com
+                    first_name: Anne
+                    handle: SmithAnne
+                    id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                    joined: '2021-10-30T22:00:00.000Z'
+                    last_name: Smith
+                    name: Anne Smith
+                    profileImage: >-
+                      https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                    website: null
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                foreign_id: ''
+                id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                latest_reactions:
+                  comment:
+                    - created_at: '2021-11-05T14:21:26.699757Z'
+                      updated_at: '2021-11-05T14:21:26.699757Z'
+                      id: b25b6d2c-0c63-4ced-9af0-9cc8283c7fe5
+                      user_id: SmithAnne
+                      user:
+                        created_at: '2021-10-07T11:18:29.562418Z'
+                        updated_at: '2021-11-16T14:40:48.165830Z'
+                        id: SmithAnne
+                        data:
+                          about: abcde
+                          banner_url: null
+                          email: anne.smith@email.com
+                          first_name: Anne
+                          handle: SmithAnne
+                          id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                          joined: '2021-10-30T22:00:00.000Z'
+                          last_name: Smith
+                          name: Anne Smith
+                          profileImage: >-
+                            https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                          website: null
+                      kind: comment
+                      activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                      data:
+                        attachments:
+                          files: [ ]
+                          images: [ ]
+                        text: wwww
+                      parent: ''
+                      latest_children: { }
+                      children_counts: { }
+                    - created_at: '2021-11-05T14:14:24.394591Z'
+                      updated_at: '2021-11-05T14:14:24.394591Z'
+                      id: 2ea13be3-9685-491e-a066-8bf797b2748f
+                      user_id: SmithAnne
+                      user:
+                        created_at: '2021-10-07T11:18:29.562418Z'
+                        updated_at: '2021-11-16T14:40:48.165830Z'
+                        id: SmithAnne
+                        data:
+                          about: abcde
+                          banner_url: null
+                          email: anne.smith@email.com
+                          first_name: Anne
+                          handle: SmithAnne
+                          id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                          joined: '2021-10-30T22:00:00.000Z'
+                          last_name: Smith
+                          name: Anne Smith
+                          profileImage: >-
+                            https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                          website: null
+                      kind: comment
+                      activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                      data:
+                        attachments:
+                          files: [ ]
+                          images: [ ]
+                        text: www
+                      parent: ''
+                      latest_children:
+                        like:
+                          - created_at: '2021-11-05T14:14:32.779562Z'
+                            updated_at: '2021-11-05T14:14:32.779562Z'
+                            id: c29a04cd-cbea-4de9-a76f-9b74fe5cff54
+                            user_id: SmithAnne
+                            user:
+                              created_at: '2021-10-07T11:18:29.562418Z'
+                              updated_at: '2021-11-16T14:40:48.165830Z'
+                              id: SmithAnne
+                              data:
+                                about: abcde
+                                banner_url: null
+                                email: anne.smith@email.com
+                                first_name: Anne
+                                handle: SmithAnne
+                                id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                                joined: '2021-10-30T22:00:00.000Z'
+                                last_name: Smith
+                                name: Anne Smith
+                                profileImage: >-
+                                  https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                                website: null
+                            kind: like
+                            activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                            data: { }
+                            parent: 2ea13be3-9685-491e-a066-8bf797b2748f
+                            latest_children: { }
+                            children_counts: { }
+                      children_counts:
+                        like: 1
+                        repost: 0
+                    - created_at: '2021-11-05T14:10:31.930038Z'
+                      updated_at: '2021-11-05T14:10:31.930038Z'
+                      id: b776463e-7b1f-42a4-a6c2-02ab17e6058f
+                      user_id: SmithAnne
+                      user:
+                        created_at: '2021-10-07T11:18:29.562418Z'
+                        updated_at: '2021-11-16T14:40:48.165830Z'
+                        id: SmithAnne
+                        data:
+                          about: abcde
+                          banner_url: null
+                          email: anne.smith@email.com
+                          first_name: Anne
+                          handle: SmithAnne
+                          id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                          joined: '2021-10-30T22:00:00.000Z'
+                          last_name: Smith
+                          name: Anne Smith
+                          profileImage: >-
+                            https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                          website: null
+                      kind: comment
+                      activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                      data:
+                        attachments:
+                          files: [ ]
+                          images: [ ]
+                        text: ww
+                      parent: ''
+                      latest_children: { }
+                      children_counts: { }
+                latest_reactions_extra:
+                  comment:
+                    next: ''
+                object: w
+                origin: null
+                own_reactions:
+                  comment:
+                    - created_at: '2021-11-05T14:21:26.699757Z'
+                      updated_at: '2021-11-05T14:21:26.699757Z'
+                      id: b25b6d2c-0c63-4ced-9af0-9cc8283c7fe5
+                      user_id: SmithAnne
+                      user:
+                        created_at: '2021-10-07T11:18:29.562418Z'
+                        updated_at: '2021-11-16T14:40:48.165830Z'
+                        id: SmithAnne
+                        data:
+                          about: abcde
+                          banner_url: null
+                          email: anne.smith@email.com
+                          first_name: Anne
+                          handle: SmithAnne
+                          id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                          joined: '2021-10-30T22:00:00.000Z'
+                          last_name: Smith
+                          name: Anne Smith
+                          profileImage: >-
+                            https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                          website: null
+                      kind: comment
+                      activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                      data:
+                        attachments:
+                          files: [ ]
+                          images: [ ]
+                        text: wwww
+                      parent: ''
+                      latest_children: { }
+                      children_counts: { }
+                    - created_at: '2021-11-05T14:14:24.394591Z'
+                      updated_at: '2021-11-05T14:14:24.394591Z'
+                      id: 2ea13be3-9685-491e-a066-8bf797b2748f
+                      user_id: SmithAnne
+                      user:
+                        created_at: '2021-10-07T11:18:29.562418Z'
+                        updated_at: '2021-11-16T14:40:48.165830Z'
+                        id: SmithAnne
+                        data:
+                          about: abcde
+                          banner_url: null
+                          email: anne.smith@email.com
+                          first_name: Anne
+                          handle: SmithAnne
+                          id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                          joined: '2021-10-30T22:00:00.000Z'
+                          last_name: Smith
+                          name: Anne Smith
+                          profileImage: >-
+                            https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                          website: null
+                      kind: comment
+                      activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                      data:
+                        attachments:
+                          files: [ ]
+                          images: [ ]
+                        text: www
+                      parent: ''
+                      latest_children:
+                        like:
+                          - created_at: '2021-11-05T14:14:32.779562Z'
+                            updated_at: '2021-11-05T14:14:32.779562Z'
+                            id: c29a04cd-cbea-4de9-a76f-9b74fe5cff54
+                            user_id: SmithAnne
+                            user:
+                              created_at: '2021-10-07T11:18:29.562418Z'
+                              updated_at: '2021-11-16T14:40:48.165830Z'
+                              id: SmithAnne
+                              data:
+                                about: abcde
+                                banner_url: null
+                                email: anne.smith@email.com
+                                first_name: Anne
+                                handle: SmithAnne
+                                id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                                joined: '2021-10-30T22:00:00.000Z'
+                                last_name: Smith
+                                name: Anne Smith
+                                profileImage: >-
+                                  https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                                website: null
+                            kind: like
+                            activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                            data: { }
+                            parent: 2ea13be3-9685-491e-a066-8bf797b2748f
+                            latest_children: { }
+                            children_counts: { }
+                      children_counts:
+                        like: 1
+                        repost: 0
+                    - created_at: '2021-11-05T14:10:31.930038Z'
+                      updated_at: '2021-11-05T14:10:31.930038Z'
+                      id: b776463e-7b1f-42a4-a6c2-02ab17e6058f
+                      user_id: SmithAnne
+                      user:
+                        created_at: '2021-10-07T11:18:29.562418Z'
+                        updated_at: '2021-11-16T14:40:48.165830Z'
+                        id: SmithAnne
+                        data:
+                          about: abcde
+                          banner_url: null
+                          email: anne.smith@email.com
+                          first_name: Anne
+                          handle: SmithAnne
+                          id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                          joined: '2021-10-30T22:00:00.000Z'
+                          last_name: Smith
+                          name: Anne Smith
+                          profileImage: >-
+                            https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODM3MDM3Nn19fV19&Signature=JVZVPkB2BsJsaR1MwckmwnzlwUUpb12QUI5i9PxyDRaVj8YpdUkGx5NJQw0hhQx0OpV1BKDCqVozHYLzrEtST-2QnTlSTsU7ME-MqzXeho0JfkjkQgInaJW5HbDzSmp1K7x845TsPrTLEGk6m1m2Zr21PJwo6ch3984-7GsIerqE7ZcwMjFw23PaMtnNxkm6vs40kjr-2SNNmoer3Jrvc6WXTy2eYz3qtBHZOvShgAmvx3~zzsOFBmNTSJhOwkBPDctruaM0CncoACqpfei4TvSWXb8OYhTG-1OMI0ItCuzF6t9RsWOnwQUN5D5Z~9jcymmrAvxQw3mbkfkhiBsoCQ__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                          website: null
+                      kind: comment
+                      activity_id: 1a30892b-3e42-11ec-bbba-12e0c51dd22e
+                      data:
+                        attachments:
+                          files: [ ]
+                          images: [ ]
+                        text: ww
+                      parent: ''
+                      latest_children: { }
+                      children_counts: { }
+                reaction_counts:
+                  comment: 3
+                  repost: 0
+                target: ''
+                text: ww
+                time: '2021-11-05T14:10:16.979496'
+                verb: post
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Non-existent feed group:
+              description: Value for path parameter `feed_group` does not match any existing feed_group.
+              value:
+                detail: userrr feed group does not exist
+                status_code: 400
+                code: 6
+                exception: FeedConfigException
+                duration: 0.11ms
+                more_info: https://getstream.io/docs/api_error_responses

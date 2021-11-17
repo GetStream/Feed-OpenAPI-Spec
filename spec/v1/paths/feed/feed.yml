@@ -1,18 +1,8 @@
 parameters:
-  - in: path
-    name: feed_slug
-    required: true
-    schema:
-      type: string
-    description: 'The feed type, e.g."user" or "timeline" etc. The first part of the feed id before the semicolon.'
-  - in: path
-    name: user_id
-    required: true
-    schema:
-      type: string
-    description: 'The second part of the feed id after the semicolon.'
-  - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
-  - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
+  - $ref: '../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+  - $ref: '../../components/parameters/path.yml#/FeedPathParameters/user_id'
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
 post:
   descrition: |
     'Create an activity in a given feed'
@@ -63,13 +53,19 @@ get:
     ''
   tags:
     - Feed
+  parameters:
+    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_gt'
+    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_gte'
+    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_lt'
+    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_lte'
+    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/limit'
   responses:
     '200':
       description: OK
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/APIResponse.yml#/FlatActivityFeedAPIResponse'
+            $ref: '../../components/schemas/APIResponse.yml#/NotEnrichedActivityFeedAPIResponse'
           example:
             next: "/api/v1.0/feed/user/SmithAnne/?api_key=wtdczaj8nwc7&id_lt=54e47fb6-2cd4-11ec-8841-12e0c51dd22e&limit=25"
             duration: "7.96ms"

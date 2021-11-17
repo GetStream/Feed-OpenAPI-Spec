@@ -1,6 +1,6 @@
 parameters:
-  - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
-  - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
 post:
   description: |
     For updating only parts of one or more activities by changing,
@@ -89,7 +89,7 @@ post:
           examples:
             "Single ID":
               value:
-                detail: 'it is not allowed to specify activity IDs with foreign IDs and timestamp queryParameters in the same request'
+                detail: 'it is not allowed to specify activity IDs with foreign IDs and timestamp parameters in the same request'
                 status_code: 400
                 code: 4
                 exception: "InputException"
