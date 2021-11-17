@@ -1,3 +1,6 @@
+parameters:
+  - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
+  - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
 post:
   description: |
     For updating only parts of one or more activities by changing,

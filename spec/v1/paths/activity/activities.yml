@@ -1,3 +1,6 @@
+parameters:
+  - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
+  - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
 post:
   description: |
     Send a JSON encoded list of activities to update. Max len is 100.

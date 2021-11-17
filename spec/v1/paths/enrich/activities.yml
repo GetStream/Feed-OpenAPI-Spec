@@ -10,6 +10,8 @@ get:
     - $ref: '../../components/queryParameters/_index.yml#/EnrichOptions/recentReactionsLimit'
     - $ref: '../../components/queryParameters/_index.yml#/EnrichOptions/withOwnReactions'
     - $ref: '../../components/queryParameters/_index.yml#/EnrichOptions/withReactionCounts'
+    - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
+    - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
   responses:
     '200':
       description: 'OK'

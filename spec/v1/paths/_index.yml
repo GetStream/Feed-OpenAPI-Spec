@@ -1,14 +1,8 @@
 /activity:
-  parameters:
-    - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
   $ref: 'activity/activity.yml'
 /activities:
-  parameters:
-    - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
   $ref: 'activity/activities.yml'
 /enrich/activities:
-  parameters:
-    - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
   $ref: 'enrich/activities.yml'
 /feed/{feed_slug}/{user_id}/:
   $ref: 'feed/feed.yml'
@@ -16,8 +10,6 @@
   get:
   post:
 /enrich/personalization/feed/:
-  parameters:
-    - $ref: '../../../components/queryParameters/common.yml#/x-stream-client'
   $ref: 'enrich/personalization/feed.yml'
 /feed/{feed_slug}/{user_id}/{activity_id|foreign_id}:
   delete:
