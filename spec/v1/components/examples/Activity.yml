@@ -4,6 +4,30 @@ MinimumActivityPayload:
   object: "abcdef"
   actor: "SmithAnne"
   verb: "post"
+NewActivityPayload:
+  foreign_id: "70ea9b0c-46d7-11ec-ae65-a4bb6d26ac2f"
+  object: "xxx"
+  actor: "SU:SmithAnne"
+  verb: "post"
+  origin: "user:SmithAnne"
+  text: "xxx"
+  attachments:
+    files: [ ]
+    images: [ ]
+NewActivityResponseData:
+  actor: SU:SmithAnne
+  attachments:
+    files: [ ]
+    images: [ ]
+  duration: 5.37ms
+  foreign_id: 70ea9b0c-46d7-11ec-ae65-a4bb6d26ac2f
+  id: 772eaacd-46f9-11ec-b04c-0ac74274a1c1
+  object: xxx
+  origin: null
+  target: ''
+  text: xxx
+  time: '2021-11-16T16:23:00.199087'
+  verb: post
 CustomActivityPayload:
   id: "3f324361-32ba-11ec-95fa-12e0c51dd22e"
   origin: "user:SmithAnne"
@@ -21,7 +45,6 @@ CustomActivityPayloadWithEnrichedUserAndReactions:
   allOf:
     - $ref: "Activity.yml#/CustomActivityPayloadWithEnrichedUser"
     - $ref: "#/ActivityReactions"
-
 ActivityReactions:
   latest_reactions:
     comment:

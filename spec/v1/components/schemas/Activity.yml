@@ -25,7 +25,6 @@ NewActivity:
         actor:
           oneOf:
             - $ref: 'User.yml#/EnrichedUser'
-            # can also be StringUser type
             - type: string
         foreign_id:
           type: string
@@ -66,9 +65,7 @@ Activity:
         - time
       properties:
         actor:
-          oneOf:
-            - type: string
-            - $ref: 'User.yml#/EnrichedUser'
+          type: string
         foreign_id:
           type: string
         id:

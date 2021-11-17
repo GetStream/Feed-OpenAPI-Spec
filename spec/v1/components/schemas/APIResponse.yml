@@ -68,6 +68,20 @@ RefreshUrlAPIResponse:
       properties:
         url:
           type: string
+FlatActivityFeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - next
+        - results
+      properties:
+        next:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: 'Activity.yml#/FlatActivity'
 FeedAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
@@ -121,6 +135,10 @@ GetActivitiesAPIResponse:
             - type: array
               items:
                 $ref: 'Activity.yml#/FlatActivityEnriched'
+PostActivityAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Activity.yml#/Activity'
 OGAPIResponse:
   allOf:
     - $ref: '#/APIResponse'

@@ -19,10 +19,18 @@ content-type:
   schema:
     type: string
     enum: [ application/json ]
-auth-type:
+stream-auth-type:
   in: header
   name: Stream-Auth-Type
   required: true
   schema:
     type: string
     enum: [ jwt ]
+x-stream-client:
+  in: header
+  name: X-Stream-Client
+  schema:
+    type: string
+    enum: ['stream-swagger-ui-v1']
+  required: true
+

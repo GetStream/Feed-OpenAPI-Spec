@@ -1,0 +1,116 @@
+parameters:
+  - in: path
+    name: feed_slug
+    required: true
+    schema:
+      type: string
+    description: 'The feed type, e.g."user" or "timeline" etc. The first part of the feed id before the semicolon.'
+  - in: path
+    name: user_id
+    required: true
+    schema:
+      type: string
+    description: 'The second part of the feed id after the semicolon.'
+  - $ref: '../../components/queryParameters/common.yml#/x-stream-client'
+  - $ref: '../../components/queryParameters/common.yml#/stream-auth-type'
+post:
+  descrition: |
+    'Create an activity in a given feed'
+  tags:
+    - Feed
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            $ref: '../../components/schemas/Activity.yml#/NewActivity'
+        example:
+          $ref: '../../components/examples/Activity.yml#/NewActivityPayload'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/PostActivityAPIResponse'
+          example:
+            $ref: '../../components/examples/Activity.yml#/NewActivityResponseData'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/FieldsErrorAPIResponse'
+          example:
+            detail: Errors for fields 'actor', 'verb', 'object'
+            status_code: 400
+            code: 4
+            exception: InputException
+            exception_fields:
+              actor:
+                - actor is a required field
+              object:
+                - object is a required field
+              verb:
+                - verb is a required field
+            duration: 0.18ms
+            more_info: https://getstream.io/docs/api_error_responses
+    '403':
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/ForbiddenInsufficientPermissions'
+
+get:
+  descrition: |
+    ''
+  tags:
+    - Feed
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/FlatActivityFeedAPIResponse'
+          example:
+            next: "/api/v1.0/feed/user/SmithAnne/?api_key=wtdczaj8nwc7&id_lt=54e47fb6-2cd4-11ec-8841-12e0c51dd22e&limit=25"
+            duration: "7.96ms"
+            results:
+              - actor: SU:SmithAnne
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                foreign_id: 70ea9b0c-46d7-11ec-ae65-a4bb6d26ac2f
+                id: 772eaacd-46f9-11ec-b04c-0ac74274a1c1
+                object: xxx
+                origin: null
+                target: ''
+                text: xxx
+                time: '2021-11-16T16:23:00.199087'
+                verb: post
+              - actor: SU:SmithAnne
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                foreign_id: ''
+                id: 69e64d7c-46f1-11ec-b781-12e0c51dd22e
+                object: '567'
+                origin: null
+                target: ''
+                text: '567'
+                time: '2021-11-16T15:25:21.940620'
+                verb: post
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Non-existent feed group:
+              description: Value for path parameter `feed_group` does not match any existing feed_group.
+              value:
+                detail: userrr feed group does not exist
+                status_code: 400
+                code: 6
+                exception: FeedConfigException
+                duration: 0.11ms
+                more_info: https://getstream.io/docs/api_error_responses
