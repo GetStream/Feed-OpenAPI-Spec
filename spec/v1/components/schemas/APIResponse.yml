@@ -184,13 +184,15 @@ GetFollowAPIResponse:
         - results
       properties:
         results:
-          type: object
-          properties:
-            created_at:
-              type: string
-            feed_id:
-              type: string
-            target_id:
-              type: string
-            updated_at:
-              type:string
+          type: array
+          items:
+            type: object
+            properties:
+              created_at:
+                type: string
+              feed_id:
+                type: string
+              target_id:
+                type: string
+              updated_at:
+                type: string

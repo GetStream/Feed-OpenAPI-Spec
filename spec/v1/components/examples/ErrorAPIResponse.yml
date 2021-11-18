@@ -31,3 +31,19 @@ ForbiddenInsufficientPermissions:
         exception: NotAllowedException
         duration: 0.00ms
         more_info: https://getstream.io/docs/api_error_responses
+ForbiddenMissingPolicies:
+  description: Forbidden
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/APIResponse.yml#/ErrorAPIResponse'
+      example:
+        detail: |
+          You do not have permission to do this, you got this error because there are no
+          policies allowing this request on this application. Please consult the
+          documentation https://getstream.io/docs/
+        status_code: 403
+        code: 17
+        exception: NotAllowedException
+        duration: 0.19ms
+        more_info: https://getstream.io/docs/api_error_responses

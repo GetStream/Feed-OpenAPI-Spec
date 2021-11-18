@@ -14,9 +14,8 @@
   $ref: 'feed/feed_slug__user_id__activity_or_foreign_id.yml'
 /feed/{feed_slug}/{user_id}/followers:
   $ref: 'feed/feed_slug__user_id/followers.yml'
-/feed/{feed_slug}/{user_id}/follows:
-  get:
-  post:
+/feed/{feed_slug}/{user_id}/following:
+  $ref: 'feed/feed_slug__user_id/following.yml'
 /feed/{feed_slug}/{user_id}/following/{target}:
   delete:
 /feed/add_to_many:

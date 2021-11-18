@@ -3,7 +3,6 @@ get:
   tags:
     - Feed
   parameters:
-    - $ref: '../../../components/parameters/query.yml#/GetFollowOptions/filter'
     - $ref: '../../../components/parameters/query.yml#/GetFollowOptions/limit'
     - $ref: '../../../components/parameters/query.yml#/GetFollowOptions/offset'
     - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
@@ -16,7 +15,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../../../components/schemas/APIResponse#/GetFollowAPIResponse'
+            $ref: '../../../components/schemas/APIResponse.yml#/GetFollowAPIResponse'
           example:
             results:
               - feed_id: notification:MustermannMax
