@@ -20,3 +20,10 @@ FeedPathParameters:
     schema:
       type: string
     description: 'Activity `foreign_id` or `id`.'
+  target_feed_id:
+    in: path
+    name: target_feed_id
+    required: true
+    schema:
+      type: string
+    description: 'Feed id of the unfollowed feed'
