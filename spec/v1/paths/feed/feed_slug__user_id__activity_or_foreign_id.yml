@@ -1,0 +1,43 @@
+delete:
+  description: ''
+  tags:
+    - Feed
+  parameters:
+    - $ref: '../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+    - $ref: '../../components/parameters/path.yml#/FeedPathParameters/user_id'
+    - $ref: '../../components/parameters/path.yml#/FeedPathParameters/activity_or_foreign_id'
+    - $ref: '../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+    - in: query
+      name: foreign_id
+      required: false
+      schema:
+        type: string
+        enum: [ '1' ]
+      description: Has to be set, if the path contains `foreign_id` and not `id`.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/DeleteActivityAPIResponse'
+          example:
+            removed: 772eaacd-46f9-11ec-b04c-0ac74274a1c1
+            duration: 12.70ms
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Invalid identifier forma:
+              description: The `activity.id` value in the path has to be a valid UUID if query param `foreign_id` is not set.
+              value:
+                detail: '"772ea" is not a valid UUID'
+                status_code: 400
+                code: 4
+                exception: InputException
+                duration: 0.13ms
+                more_info: https://getstream.io/docs/api_error_responses

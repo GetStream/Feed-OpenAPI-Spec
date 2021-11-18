@@ -13,3 +13,10 @@ FeedPathParameters:
     schema:
       type: string
     description: 'The second part of the feed id after the semicolon.'
+  activity_or_foreign_id:
+    in: path
+    name: activity_or_foreign_id
+    required: true
+    schema:
+      type: string
+    description: 'Activity `foreign_id` or `id`.'

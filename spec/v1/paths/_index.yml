@@ -10,8 +10,8 @@
   $ref: 'enrich/feed/feed_slug__user_id.yml'
 /enrich/personalization/feed/:
   $ref: 'enrich/personalization/feed.yml'
-/feed/{feed_slug}/{user_id}/{activity_id|foreign_id}:
-  delete:
+/feed/{feed_slug}/{user_id}/{activity_or_foreign_id}:
+  $ref: 'feed/feed_slug__user_id__activity_or_foreign_id.yml'
 /feed/{feed_slug}/{user_id}/followers:
   get:
 /feed/{feed_slug}/{user_id}/follows:

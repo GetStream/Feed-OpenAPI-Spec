@@ -54,11 +54,11 @@ get:
   tags:
     - Feed
   parameters:
-    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_gt'
-    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_gte'
-    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_lt'
-    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/id_lte'
-    - $ref: '../../components/parameters/_index.yml#/FeedPaginationOptions/limit'
+    - $ref: '../../components/parameters/query.yml#/FeedPaginationOptions/id_gt'
+    - $ref: '../../components/parameters/query.yml#/FeedPaginationOptions/id_gte'
+    - $ref: '../../components/parameters/query.yml#/FeedPaginationOptions/id_lt'
+    - $ref: '../../components/parameters/query.yml#/FeedPaginationOptions/id_lte'
+    - $ref: '../../components/parameters/query.yml#/FeedPaginationOptions/limit'
   responses:
     '200':
       description: OK

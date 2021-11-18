@@ -74,9 +74,9 @@ get:
   tags:
     - Activity
   parameters:
-    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/ids'
-    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/foreign_ids'
-    - $ref: '../../components/parameters/_index.yml#/GetActivitiesOptions/timestamps'
+    - $ref: '../../components/parameters/query.yml#/GetActivitiesOptions/ids'
+    - $ref: '../../components/parameters/query.yml#/GetActivitiesOptions/foreign_ids'
+    - $ref: '../../components/parameters/query.yml#/GetActivitiesOptions/timestamps'
   responses:
     '200':
       description: 'OK'

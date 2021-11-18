@@ -167,6 +167,11 @@ PostActivityAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
     - $ref: 'Activity.yml#/Activity'
+DeleteActivityAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - removed:
+        type: string
 OGAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
