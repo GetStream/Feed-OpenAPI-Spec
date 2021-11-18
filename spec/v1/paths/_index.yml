@@ -23,7 +23,7 @@
 /feed/add_to_many:
   $ref: 'feed/add_to_many.yml'
 /follow_many:
-  $ref: 'follow_many.yml'
+  $ref: 'feed/follow_many.yml'
 /reaction:
   post:
 /reaction/{id}:
@@ -33,8 +33,6 @@
 /reaction/{lookup_addr}/{lookup_value}/{kind}:
   get:
 /og:
-  parameters:
-    - $ref: '../../components/parameters/common.yml#/x-stream-client'
   $ref: 'og/og.yml'
 /collections/{collection_name}:
   post:

@@ -3,6 +3,8 @@ get:
   tags:
     - Open Graph
   parameters:
+    - $ref: '../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../components/parameters/common.yml#/stream-auth-type'
     - in: query
       name: url
       required: true
