@@ -174,3 +174,19 @@ FeedContextOptions:
       For example activity object with the key `own_reactions` would list only
       reactions created by the user with the given `user_id`. Is required if the JWT
       does not include `user_id` claim.
+GetFollowOptions:
+  filter:
+    in: query
+    name: filter
+    required: false
+    schema:
+      type: array
+      items:
+        type: string
+    style: form
+    explode: false
+    description: Array of feed id (`<feed_slug>:<user_id>`) to filter on
+  limit:
+    $ref: '#/FeedPaginationOptions/limit'
+  offset:
+    $ref: '#/RankedFeedOptions/offset'

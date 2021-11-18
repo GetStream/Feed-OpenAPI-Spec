@@ -1,0 +1,72 @@
+get:
+  description: List the followers of this feed
+  tags:
+    - Feed
+  parameters:
+    - $ref: '../../../components/parameters/query.yml#/GetFollowOptions/filter'
+    - $ref: '../../../components/parameters/query.yml#/GetFollowOptions/limit'
+    - $ref: '../../../components/parameters/query.yml#/GetFollowOptions/offset'
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'
+    - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse#/GetFollowAPIResponse'
+          example:
+            results:
+              - feed_id: notification:MustermannMax
+                target_id: user:SmithAnne
+                created_at: '2021-11-03T15:03:28.095627943Z'
+                updated_at: '2021-11-03T15:03:28.095627943Z'
+              - feed_id: timeline:MustermannMax
+                target_id: user:SmithAnne
+                created_at: '2021-11-03T15:03:27.893697048Z'
+                updated_at: '2021-11-03T15:03:27.893697048Z'
+              - feed_id: timeline:SmithAnne
+                target_id: user:SmithAnne
+                created_at: '2021-10-08T13:30:03.839103926Z'
+                updated_at: '2021-10-08T13:30:03.839103926Z'
+            duration: 2.67ms
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Invalid feed id:
+              description: Returned if any of the feed ids in query param `filter` does not match the pattern `<feed_group>:<user_id>`
+              value:
+                detail: '"user" is not a valid feed'
+                status_code: 400
+                code: 4
+                exception: InputException
+                duration: 0.14ms
+                more_info: https://getstream.io/docs/api_error_responses
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+            examples:
+              JWT:
+                description: |
+                  The user_id claim in the JWT payload does not match
+                  the `{feed_slug}/{user_id}` part of the URL.
+                value:
+                  detail: |
+                    You do not have permission to do this, you got this error because there are no
+                    policies allowing this request on this application. Please consult the
+                    documentation https://getstream.io/docs/
+                  status_code: 403
+                  code: 17
+                  exception: NotAllowedException
+                  duration: 0.13ms
+                  more_info: https://getstream.io/docs/api_error_responses
+

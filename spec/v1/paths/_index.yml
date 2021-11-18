@@ -13,7 +13,7 @@
 /feed/{feed_slug}/{user_id}/{activity_or_foreign_id}:
   $ref: 'feed/feed_slug__user_id__activity_or_foreign_id.yml'
 /feed/{feed_slug}/{user_id}/followers:
-  get:
+  $ref: 'feed/feed_slug__user_id/followers.yml'
 /feed/{feed_slug}/{user_id}/follows:
   get:
   post:

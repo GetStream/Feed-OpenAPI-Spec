@@ -176,3 +176,21 @@ OGAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
     - $ref: 'Og.yml#/OGData'
+GetFollowAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - results
+      properties:
+        results:
+          type: object
+          properties:
+            created_at:
+              type: string
+            feed_id:
+              type: string
+            target_id:
+              type: string
+            updated_at:
+              type:string
