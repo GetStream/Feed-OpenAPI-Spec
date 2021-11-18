@@ -19,7 +19,7 @@
 /feed/{feed_slug}/{user_id}/following/{target_feed_id}:
   $ref: 'feed/feed_slug__user_id/following__target.yml'
 /feed/add_to_many:
-  post:
+  $ref: 'feed/add_to_many.yml'
 /feed_targets/{feedUrl}/activity_to_targets:
   post:
 /follow_many:
