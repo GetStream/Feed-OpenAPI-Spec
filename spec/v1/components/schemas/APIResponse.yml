@@ -200,3 +200,16 @@ EnrichedReactionAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
     - $ref: 'Reaction.yml#/EnrichedReaction'
+ReactionFilterAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      properties:
+        next:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: 'Reaction.yml#/EnrichedReaction'
+        activity:
+          $ref: 'Activity.yml#/EnrichedActivity'

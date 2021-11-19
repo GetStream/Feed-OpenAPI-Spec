@@ -20,7 +20,6 @@ get:
     - $ref: '../../components/parameters/query.yml#/ReactionFilterConditions/with_own_children'
     - $ref: '../../components/parameters/path.yml#/FilterReactionsParameters/lookup_type'
     - $ref: '../../components/parameters/path.yml#/FilterReactionsParameters/lookup_value'
-    - $ref: '../../components/parameters/path.yml#/FilterReactionsParameters/kind'
     - $ref: '../../components/parameters/common.yml#/x-stream-client'
     - $ref: '../../components/parameters/common.yml#/stream-auth-type'
   responses:

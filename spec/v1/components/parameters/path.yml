@@ -12,7 +12,7 @@ FeedPathParameters:
     required: true
     schema:
       type: string
-    description: 'The second part of the feed id after the semicolon.'
+    description: 'User id is the second part of the feed id following the semicolon.'
   activity_or_foreign_id:
     in: path
     name: activity_or_foreign_id
@@ -27,3 +27,28 @@ FeedPathParameters:
     schema:
       type: string
     description: 'Feed id of the unfollowed feed'
+FilterReactionsParameters:
+  lookup_type:
+    in: path
+    name: lookup_type
+    required: true
+    schema:
+      type: string
+      enum:
+        - user_id
+        - activity_id
+        - reaction_id
+  lookup_value:
+    in: path
+    name: lookup_value
+    required: true
+    schema:
+      type: string
+    description: Can be actual user or activity or reaction id
+  kind:
+    in: path
+    name: kind
+    required: true
+    schema:
+      type: string
+    description: Can be `"post"`, `"like"`, or any other reaction kind.

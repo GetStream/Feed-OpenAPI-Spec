@@ -28,8 +28,10 @@
   $ref: 'reaction/reaction.yml'
 /reaction/{id}:
   $ref: 'reaction/id.yml'
+/reaction/{lookup_type}/{lookup_value}:
+  $ref: 'reaction/lookup_type__lookup_value.yml '
 /reaction/{lookup_type}/{lookup_value}/{kind}:
-  get:
+  $ref: 'reaction/lookup_type__lookup_value__kind.yml '
 /og:
   $ref: 'og/og.yml'
 /collections/{collection_name}:

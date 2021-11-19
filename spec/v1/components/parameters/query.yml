@@ -190,3 +190,55 @@ GetFollowOptions:
     $ref: '#/FeedPaginationOptions/limit'
   offset:
     $ref: '#/RankedFeedOptions/offset'
+ReactionFilterConditions:
+  id_gt:
+    in: query
+    name: id_gt
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **later** than the activity with the given `id`.
+  id_gte:
+    in: query
+    name: id_gte
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **later** than and including the activity with the given `id`.
+  id_lt:
+    in: query
+    name: id_lt
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **sooner** than the activity with the given `id`.
+  id_lte:
+    in: query
+    name: id_lte
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **sooner** than and including the activity with the given `id`.
+  limit:
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: number
+    description: |
+      The returned array will contain this many items.
+      If not specified, resulting array will contain 25 items.
+  with_activity_data:
+    in: query
+    name: with_activity_data
+    required: false
+    schema:
+      type: boolean
+    description:
+  with_own_children:
+    in: query
+    name: with_own_children
+    required: false
+    schema:
+      type: boolean
+    description:
