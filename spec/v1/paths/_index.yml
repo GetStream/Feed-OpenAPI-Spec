@@ -25,12 +25,10 @@
 /follow_many:
   $ref: 'feed/follow_many.yml'
 /reaction:
-  post:
+  $ref: 'reaction/reaction.yml'
 /reaction/{id}:
-  get:
-  delete:
-  put:
-/reaction/{lookup_addr}/{lookup_value}/{kind}:
+  $ref: 'reaction/id.yml'
+/reaction/{lookup_type}/{lookup_value}/{kind}:
   get:
 /og:
   $ref: 'og/og.yml'

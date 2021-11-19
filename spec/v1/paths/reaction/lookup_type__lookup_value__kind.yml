@@ -1,0 +1,30 @@
+get:
+  description: |
+    Retrieve reactions by `activity_id`, `user_id` or `reaction_id` (to paginate children reactions).
+    Pagination can be done using `id_lt`, `id_lte`, `id_gt` and `id_gte` parameters `id_lt` and `id_lte`
+    return reactions order by creation descending starting from the reaction with the ID provided,
+    when id_lte is used the reaction with ID equal to the value provided is included.
+    `id_gt` and `id_gte` return reactions order by creation ascending (oldest to newest)
+    starting from the reaction with the ID provided, when `id_gte` is used
+    the reaction with ID equal to the value provided is included.
+    results are limited to 25 at most and are ordered newest to oldest by default.
+  tags:
+    - Reaction
+  paramaters:
+    -
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+          example:
+    400:
+      content:
+        application/json:
+          schema:
+          example:
+    403:
+      content:
+        application/json:
+          schema:
+          example:

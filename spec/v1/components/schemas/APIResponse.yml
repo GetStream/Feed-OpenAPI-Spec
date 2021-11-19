@@ -196,3 +196,7 @@ GetFollowAPIResponse:
                 type: string
               updated_at:
                 type: string
+EnrichedReactionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Reaction.yml#/EnrichedReaction'

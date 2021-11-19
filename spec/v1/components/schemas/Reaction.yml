@@ -32,6 +32,32 @@ Reaction:
     target_fields_extra_data:
       type: object
       additionalProperties: true
+ReactionBody:
+  properties:
+    activity_id:
+      type: string
+    data:
+      type: object
+    id:
+      type: string
+      description: API will generate an id if it's missing
+    kind:
+      type: string
+      description: Required only for add/addChile, not update
+    parent:
+      type: string
+      description: Only required for child reactions
+    target_feeds:
+      type: array
+      items:
+        type: string
+      description: An array of feeds (IDs) to which to send an activity with the reaction
+    target_feeds_extra_data:
+      type: object
+      description: TargetFeedsExtraData;
+    user_id:
+      type: string;
+      description: Can be used only if the JWT does not contain `user_id` claim
 EnrichedReaction:
   allOf:
     - $ref: '#/Reaction'

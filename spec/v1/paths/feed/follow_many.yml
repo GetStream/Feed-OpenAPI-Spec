@@ -3,8 +3,8 @@ post:
   tags:
     - '[Server-Side Only] Feed | Batch Operations'
   parameters:
-    - $ref: '../components/parameters/common.yml#/x-stream-client'
-    - $ref: '../components/parameters/common.yml#/stream-auth-type'
+    - $ref: '../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../components/parameters/common.yml#/stream-auth-type'
     - in: query
       name: activity_copy_limit
       required: false
@@ -17,7 +17,7 @@ post:
         schema:
           type: array
           items:
-            $ref: '../components/schemas/Feed.yml#/BaseFollowRelation'
+            $ref: '../../components/schemas/Feed.yml#/BaseFollowRelation'
         example:
           - source: 'timeline:SmithAnne'
             target: 'user:MustermannMax'
@@ -29,7 +29,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/APIResponse.yml#/APIResponse'
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
           example:
             duration: '9.54ms'
     400:
@@ -37,7 +37,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
           example:
             detail: Request payload is not valid
             status_code: 400
@@ -46,4 +46,4 @@ post:
             duration: 0.11ms
             more_info: https://getstream.io/docs/api_error_responses
     403:
-      $ref: '../components/examples/ErrorAPIResponse.yml#/Forbidden'
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
