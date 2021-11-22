@@ -13,3 +13,6 @@ CollectionAddPayload:
 CollectionUpdatePayload:
   data:
     $ref: 'Collection.yml#/BaseCollection/properties/data'
+UserCreatePayload:
+  id: string;
+  data: 'User.yml#/EnrichedUser/properties/data'

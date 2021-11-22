@@ -41,15 +41,10 @@
 /collections:
   $ref: 'collections/collections.yml'
 /files:
-  post:
-  delete:
+  $ref: 'files/files.yml'
 /images:
-  get:
-  post:
-  delete:
+  $ref: 'images/images.yml'
 /user:
-  post:
+  $ref: 'user/user.yml'
 /user/{id}:
-  get:
-  put:
-  delete:
+  $ref: 'user/user/id.yml'

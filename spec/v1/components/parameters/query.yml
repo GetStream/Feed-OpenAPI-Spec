@@ -256,3 +256,11 @@ CollectionsDeleteParams:
     schema:
       type: string
     description: Item IDs separated by comma
+GetUserOptions:
+  with_follow_counts:
+    in: query
+    name: with_follow_counts
+    required: false
+    schema:
+      type: boolean
+    description: If true the returned user object will contain keys `followers_count`, `following_count`

@@ -235,3 +235,15 @@ UpsertCollectionAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
     - $ref: 'APIRequestPayload.yml#/CollectionsUpsertPayload'
+UserAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'User.yml#/EnrichedUser'
+    - object:
+      properties:
+        followers_count:
+          type: number
+          required: false
+        following_count:
+          type: number
+          required: false

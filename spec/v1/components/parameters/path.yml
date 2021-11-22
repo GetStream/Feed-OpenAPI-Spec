@@ -65,4 +65,12 @@ CollectionPathParameters:
     required: true
     schema:
       type: string
-    description: Item id
+    description: Item ID
+UserPathParameters:
+  id:
+    in: path
+    name: id
+    required: true
+    schema:
+      type: string
+    description: User ID
