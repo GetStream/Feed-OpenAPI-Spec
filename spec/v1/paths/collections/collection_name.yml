@@ -1,0 +1,28 @@
+post:
+  description:
+  tags:
+    - Collections
+  requestBody:
+    content:
+      application/json:
+        schema:
+        example:
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+          example:
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+          example:
+    403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+          example:

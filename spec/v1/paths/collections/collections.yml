@@ -1,0 +1,154 @@
+parameters:
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+get:
+  description: |
+    Select all objects with ids from the collection.
+    Cannot be accessed with user authentication - JWT containing `user_id` claim.
+  tags:
+    - '[Server-Side Only] Collections'
+  parameters:
+    - in: query
+      name: foreign_ids
+      required: true
+      schema:
+        type: array
+        items:
+          type: string
+      description: An array of collection paths in format of `<colleaction_name>:<item_id>`
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/SelectCollectionAPIResponse'
+          example:
+            duration: 2.98ms
+            response:
+              data:
+                - id: cheese-burger
+                  collection: food
+                  foreign_id: food:cheese-burger
+                  data:
+                    collection: food
+                    data:
+                      name: Cheese Burger
+                      rating: 4 stars
+                  created_at: '2021-11-22T10:23:25.426811Z'
+                  updated_at: '2021-11-22T10:23:25.426811Z'
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Missing foreign ID param:
+              value:
+                detail: '"foreign_ids" field is missing or empty'
+                status_code: 400
+                code: 4
+                exception: InputException
+                duration: 0.08ms
+                more_info: https://getstream.io/docs/api_error_responses
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
+post:
+  description:
+  tags:
+    - '[Server-Side Only] Collections'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            data:
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '../../components/schemas/APIRequest.yml#/CollectionsUpsertPayload'
+        example:
+          data:
+            food:
+              - collection: food
+                id: cheese-burger
+                data:
+                  name: Cheese Burger
+                  rating: 4 stars
+              - collection: food
+                id: hamburger
+                data:
+                  name: Hamburger
+                  rating: 3 stars
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/UpsertCollectionAPIResponse'
+          example:
+            duration: 5.94ms
+            data:
+              food:
+                - collection: food
+                  data:
+                    name: Cheese Burger
+                    rating: 4 stars
+                  id: cheese-burger
+                - collection: food
+                  data:
+                    name: Hamburger
+                    rating: 3 stars
+                  id: hamburger
+
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Missing required field:
+              value:
+                detail: '"id" field is missing, should contain a foreign id'
+                status_code: 400
+                code: 4
+                exception: InputException
+                duration: 0.14ms
+                more_info: https://getstream.io/docs/api_error_responses
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
+delete:
+  description:
+  tags:
+    - '[Server-Side Only] Collections'
+  parameters:
+    - $ref: '../../components/parameters/query.yml#/CollectionsDeleteParams/collection_name'
+    - $ref: '../../components/parameters/query.yml#/CollectionsDeleteParams/ids'
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            duration: "1.54ms"
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          example:
+            detail: invalid collection name
+            status_code: 400
+            code: 4
+            exception: InputException
+            duration: 0.09ms
+            more_info: https://getstream.io/docs/api_error_responses
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'

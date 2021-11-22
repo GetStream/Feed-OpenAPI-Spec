@@ -1,0 +1,7 @@
+CollectionsUpsertPayload:
+  data:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        $ref: 'Collection.yml#/NewCollectionEntry'

@@ -35,15 +35,11 @@
 /og:
   $ref: 'og/og.yml'
 /collections/{collection_name}:
-  post:
+  $ref: 'collections/collection_name.yml'
 /collections/{collection_name}/{id}:
-  get:
-  put:
-  delete:
+  $ref: 'collections/collection_name__id.yml'
 /collections:
-  get:
-  post:
-  delete:
+  $ref: 'collections/collections.yml'
 /files:
   post:
   delete:

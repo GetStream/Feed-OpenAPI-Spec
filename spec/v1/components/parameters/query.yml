@@ -242,3 +242,17 @@ ReactionFilterConditions:
     schema:
       type: boolean
     description:
+CollectionsDeleteParams:
+  collection_name:
+    in: query
+    name: collection_name
+    required: true
+    schema:
+      type: string
+  ids:
+    in: query
+    name: ids
+    required: true
+    schema:
+      type: string
+    description: Item IDs separated by comma

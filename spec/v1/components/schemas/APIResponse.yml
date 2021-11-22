@@ -213,3 +213,25 @@ ReactionFilterAPIResponse:
             $ref: 'Reaction.yml#/EnrichedReaction'
         activity:
           $ref: 'Activity.yml#/EnrichedActivity'
+CollectionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Collection.yml#/CollectionResponse'
+SelectCollectionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      properties:
+        response:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                allOf:
+                  - $ref: 'Collection.yml#/CollectionResponse'
+
+UpsertCollectionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'APIRequest.yml#/CollectionsUpsertPayload'
