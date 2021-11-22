@@ -52,3 +52,17 @@ FilterReactionsParameters:
     schema:
       type: string
     description: Can be `"post"`, `"like"`, or any other reaction kind.
+CollectionPathParameters:
+  collection_name:
+    in: path
+    name: collection_name
+    required: true
+    schema:
+      type: string
+  id:
+    in: path
+    name: id
+    required: true
+    schema:
+      type: string
+    description: Item id

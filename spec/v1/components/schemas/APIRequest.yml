@@ -5,3 +5,7 @@ CollectionsUpsertPayload:
       type: array
       items:
         $ref: 'Collection.yml#/NewCollectionEntry'
+CollectionUpdatePayload:
+  data:
+    type: object
+    description: any custom fields you have
