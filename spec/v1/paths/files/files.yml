@@ -1,0 +1,63 @@
+parameters:
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+post:
+  description:
+  tags:
+    - Files
+  requestBody:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            file:
+              type: string
+              format: binary
+  responses:
+    201:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/FileUploadAPIResponse'
+          example:
+            duration: 130.35ms
+            file: |
+              https://us-east.stream-io-cdn.com/1145265/attachments/51e2195a-69aa-4cf3-bcfe-c829f83b893d.test.txt?dl=test.txt&Expires=1638827812&Signature=CY5eot9mZQN5QRNdbw131HfMd63iUKmi5KQ~GQ7ezpoE8sHYUJata3JTzhK0-ka8iDmoytRa9say7cAMN0hQHzf5V9Tdiwa8NAWQdwic9NbfGtWR8D-XiXfzCBiPh-9~sQp8R3tAu6VShcgTxnHBlNgvbw3j-xAT1Rb2kzjDlfVf40kd~8YrWDy9MnAifrNTaoo~H73fGi7r~rpqJp4CM03-ylEv0Bmtij4nsVlGjda13W7R7EPHod6gLPy8oLj-TXE24Ss87BxyoTEjoxX-a3Vi~FoCU~L16cH0LfINyox5Y7W2DFtVyJV4v~ISqFKEBO~ut9YHnQ2hN1oHVtOIGA__&Key-Pair-Id=APKAIHG36VEWPDULE23Q
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          example:
+            detail: File size is 0
+            status_code: 400
+            code: 4
+            exception: InputException
+            duration: 0.16ms
+            more_info: https://getstream.io/docs/api_error_responses
+delete:
+  description: Delete file. The user can delete only own uplaoded images. Seet the HTTP response status 403.
+  tags:
+    - Files
+  parameters:
+    - in: query
+      name: url
+      required: true
+      schema:
+        type: string
+  responses:
+    201:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            duration: "55.21ms"
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'
+    404:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/404'

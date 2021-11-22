@@ -1,0 +1,90 @@
+parameters:
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+post:
+  description: Upload image. For more information see the [documentation](https://getstream.io/activity-feeds/docs/node/files_introduction/).
+  tags:
+    - Images
+  requestBody:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            file:
+              type: string
+              format: binary
+  responses:
+    201:
+      description: OK
+      content:
+        application/json:
+          schema:
+            - $ref: '../../components/schemas/APIResponse.yml#/FileUploadAPIResponse'
+          example:
+            duration: 169.51ms
+            file: >-
+              https://us-east.stream-io-cdn.com/1145265/images/d0c04998-8616-45e1-97fd-ebf01d960ad5.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzL2QwYzA0OTk4LTg2MTYtNDVlMS05N2ZkLWViZjAxZDk2MGFkNS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZoPSomcmVzaXplPSomcm89MCZ3PSoiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2Mzg4MjgzMTZ9fX1dfQ__&Signature=l9UeliYe7R~e6TVfu0O60P-RN4ALHBv2ZDn1mMtbSj1NiWp1bsapoCkhcr-FsdoMSeL0hofasfCXCtx0OZHhqrCSRPo02kRoBbEGC6DQxvOXGnQwIhPJ2e-iHNXZUhbIjrMJFh~k9-x~ngv~MuA5eAd4A~XxNK~8w5ODZkifeqMrEc0y3Lq7XCIDyTmsDXbGhryb2gOp~sNRN9ddrqdIeWW50eoXC-d7zhI3A3zJhptEwlCBpsnp7eD~imOyTy2pR2aX2K88TXCn~-G-WnNryMfh~cyEfDY6oGjtZwslhZgmAzy0ryaHihSgqQSJsNEfTUhOcDA297tsQEqqRJnpwg__&crop=*&h=*&resize=*&ro=0&w=*
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          example:
+            detail: File type text/plain is not supported
+            status_code: 400
+            code: 4
+            exception: InputException
+            duration: 0.20ms
+            more_info: https://getstream.io/docs/api_error_responses
+get:
+  description: Generate a diffrent variant of the uploaded image.
+  tags:
+    - Images
+  parameters:
+    - $ref: '../../components/parameters/query.yml#/ImageProcessOptions/crop'
+    - $ref: '../../components/parameters/query.yml#/ImageProcessOptions/resize'
+    - $ref: '../../components/parameters/query.yml#/ImageProcessOptions/h'
+    - $ref: '../../components/parameters/query.yml#/ImageProcessOptions/w'
+    - in: query
+      name: url
+      required: true
+      schema:
+        type: string
+  responses:
+    201:
+      description: OK
+      content:
+        application/json:
+          schema:
+            - $ref: '../../components/schemas/APIResponse.yml#/FileUploadAPIResponse'
+          example:
+            duration: 15.39ms
+            file: |
+              https://us-east.stream-io-cdn.com/1145265/images/d0c04998-8616-45e1-97fd-ebf01d960ad5.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzL2QwYzA0OTk4LTg2MTYtNDVlMS05N2ZkLWViZjAxZDk2MGFkNS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZmaXQ9Y2xpcCZoPSomcmVzaXplPSomcm89MCZ3PSoiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2Mzg4MjkzMTd9fX1dfQ__&Signature=PjwmePXeYWqA225oYcSLlscGyim0b-J6rBrRqxWpk5qXQOV8YB3tg7eRKjxK81khxJqKSJluRWrW3XSsNH9ss7L56BHm2kaddl~jXAGSWORGeiWpSchqKRMIhO0TtKtD2pnt53X~71JcZSRXzbmkX7JB~T1OivjqCWqM77DA6h-g-1Gv32Q2MojPPSROGwos4kwLKXoN833PnuQNMCHQOCPNBy3RxBA1n4qh~m0gVubf~SBlZGp9bWtVnE8JXXMrpPy1~oUuvzqju1~aIsjuTlTX1DPPrEOr3VYKkH1IMawhZiyMqcPlSMpjJBlOMlQmUkkuMRm0hPlhFhu~1SWD5w__&crop=*&fit=clip&h=*&resize=*&ro=0&w=10
+    404:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/404'
+delete:
+  description: Delete image. A user can delete only own images. See the response HTTP status 403.
+  tags:
+    - Images
+  parameters:
+    - in: query
+      name: url
+      required: true
+      schema:
+        type: string
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+            example:
+              duration: "65.43ms"
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'
+    404:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/404'

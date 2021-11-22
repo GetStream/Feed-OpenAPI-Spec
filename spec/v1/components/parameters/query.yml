@@ -256,6 +256,43 @@ CollectionsDeleteParams:
     schema:
       type: string
     description: Item IDs separated by comma
+ImageProcessOptions:
+  crop:
+    in: query
+    name: crop
+    required: false
+    schema:
+      type: string
+      enum: ['top', 'bottom', 'left', 'right', 'center']
+      default: center
+    description: The cropping mode
+  resize:
+    in: query
+    name: resize
+    required: false
+    schema:
+      type: string
+      enum:  ['clip', 'crop', 'scale', 'fill']
+      default: 'clip'
+    description: The strategy used to adapt the image the new dimensions
+  h:
+    in: query
+    name: h
+    required: false
+    schema:
+      oneOf:
+        - type: number
+        - type: string
+    description: The final height of the processed image in pixels.
+  w:
+    in: query
+    name: w
+    required: false
+    schema:
+      oneOf:
+        - type: number
+        - type: string
+    description: The final width of the processed image in pixels.
 GetUserOptions:
   with_follow_counts:
     in: query
