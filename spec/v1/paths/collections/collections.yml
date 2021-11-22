@@ -68,7 +68,7 @@ post:
               additionalProperties:
                 type: array
                 items:
-                  $ref: '../../components/schemas/APIRequest.yml#/CollectionsUpsertPayload'
+                  $ref: '../../components/schemas/APIRequestPayload.yml#/CollectionsUpsertPayload'
         example:
           data:
             food:

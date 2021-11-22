@@ -47,7 +47,8 @@ put:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/APIRequest.yml#/CollectionUpdatePayload'
+          properties:
+            $ref: '../../components/schemas/APIRequestPayload.yml#/CollectionUpdatePayload'
         example:
           data:
             name: Cheese Burger
@@ -58,20 +59,19 @@ put:
       content:
         application/json:
           schema:
-            schema:
-              $ref: '../../components/schemas/APIResponse.yml#/CollectionAPIResponse'
-            example:
-              duration: 0.79ms
-              id: cheese-burger
+            $ref: '../../components/schemas/APIResponse.yml#/CollectionAPIResponse'
+          example:
+            duration: 0.79ms
+            id: cheese-burger
+            collection: food
+            foreign_id: food:cheese-burger
+            data:
               collection: food
-              foreign_id: food:cheese-burger
               data:
-                collection: food
-                data:
-                  name: Cheese Burger
-                  rating: 3 stars
-              created_at: '2021-11-22T10:23:25.426811Z'
-              updated_at: '2021-11-22T10:23:25.426811Z'
+                name: Cheese Burger
+                rating: 3 stars
+            created_at: '2021-11-22T10:23:25.426811Z'
+            updated_at: '2021-11-22T10:23:25.426811Z'
     404:
       $ref: '../../components/examples/ErrorAPIResponse.yml#/404'
     403:

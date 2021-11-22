@@ -234,4 +234,4 @@ SelectCollectionAPIResponse:
 UpsertCollectionAPIResponse:
   allOf:
     - $ref: '#/APIResponse'
-    - $ref: 'APIRequest.yml#/CollectionsUpsertPayload'
+    - $ref: 'APIRequestPayload.yml#/CollectionsUpsertPayload'
