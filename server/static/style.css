@@ -3,6 +3,7 @@
     padding: 8px 30px;
 }
 
+/*thia is just a workaround to insert the logo*/
 .topbar-wrapper img[alt="Swagger UI"], .topbar-wrapper span {
     visibility: hidden;
     width: 0;
