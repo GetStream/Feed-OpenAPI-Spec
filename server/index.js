@@ -17,8 +17,7 @@ app.use('/',
         {
             customSiteTitle: 'Stream Activity Feeds | OpenAPI Spec',
             customfavIcon: 'favicon.ico',
-            customCssUrl: 'style.css',
-            customJs: 'custom.js',
+            customCssUrl: 'style.css'
         }
     )
 );
