@@ -5,7 +5,97 @@ info:
     name: Stream Support
     url: https://getstream.io/contact/support/
     email: support@getstream.io
-  version: '1.0'
+  version: '1.0.0'
+  description: |
+    This is a documentation to Stream Activity Feed API written as OpenAPI 3.0 specification.
+    The aim is to provide you with environment, where you can get quickly acquinted with the
+    capabilities the API offers.
+
+    In order to be able to perform requests to the API every HTTP request should contain the
+    following authorization tokens:
+    - **API key**
+    - **JWT**
+
+    Just click on the Authorize button and paste each token into corresponding input field.
+
+    ### How to get your API key
+    You can find the API key in your app's [dashboard](https://getstream.io/dashboard/).
+    To create an app, you will need to create an account. Just visit our
+    [website](https://getstream.io/activity-feeds/).
+
+    ### How to get a JWT
+    You can generate the JWT at [jwt.io](https://jwt.io/).
+
+    ### Server-Side Only endpoints
+    In order to perform requests to endpoints marked as Server-Side Only, your token should
+    have the admin level permissions set.
+
+    You can control permissions by setting the following claims to JWT:
+    - `"resource"`
+    - `"action"`
+    - `"feed_id"`
+
+    Few examples follow.
+
+    #### Permission to do anything anywhere
+    ```
+    {
+      ...
+      "resource": "*",
+      "action": "*",
+      "feed_id": "*"
+      ...
+    }
+    ```
+
+    #### Permission to do anything on activities
+    ```
+    {
+      ...
+      "resource": "activities",
+      "action": "*",
+      "feed_id": "*"
+      ...
+    }
+    ```
+
+    #### Permission to do anything on feed `user:SmithAnne`
+    ```
+    {
+      ...
+      "resource": "*",
+      "action": "*",
+      "feed_id": "user:SmithAnne"
+      ...
+    }
+    ```
+
+    #### Permission to write into feed `user:SmithAnne`
+    ```
+    {
+      ...
+      "resource": "*",
+      "action": "write",
+      "feed_id": "user:SmithAnne"
+      ...
+    }
+    ```
+
+    Otherwise just make sure that the token contains the `"user_id"` claim. That is an ID
+    of an existing user in your application. That way you simulate a request done by one
+    of your app's users. For example:
+    ```
+    {
+      ...
+      "user_id": "SmithAnne"
+      ...
+    }
+    ```
+
+    ### Docs
+
+    To learn more about our feeds, visit our [documentation site](https://getstream.io/activity-feeds/docs).
+
 servers:
   - url: https://api.stream-io-api.com/api/v1.0/
     description: The standard API server
