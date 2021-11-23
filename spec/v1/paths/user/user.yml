@@ -1,7 +1,7 @@
 post:
   description: Create a new user
   tags:
-    - '[Server-Side Only] User'
+    - User *
   parameters:
     - $ref: '../../components/parameters/common.yml#/x-stream-client'
     - $ref: '../../components/parameters/common.yml#/stream-auth-type'

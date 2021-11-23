@@ -8,7 +8,7 @@ post:
     metadata used during feed ranking. Activities are updated by `foreign_id`.
     Changing the original `time` property is not allowed.
   tags:
-    - '[Server-Side Only] Activity'
+    - Activity *
   requestBody:
     content:
       application/json:

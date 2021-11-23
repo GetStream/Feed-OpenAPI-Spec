@@ -3,7 +3,7 @@ post:
     Add one activity to many feeds.
     This endpoint cannot be called if the JWT contains the `user_id`.
   tags:
-    - '[Server-Side Only] Feed | Batch Operations'
+    - Feed *
   parameters:
     - $ref: '../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
     - $ref: '../../components/parameters/path.yml#/FeedPathParameters/user_id'

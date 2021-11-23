@@ -6,7 +6,7 @@ get:
     Select all objects with ids from the collection.
     Cannot be accessed with user authentication - JWT containing `user_id` claim.
   tags:
-    - '[Server-Side Only] Collections'
+    - Collections *
   parameters:
     - in: query
       name: foreign_ids
@@ -57,7 +57,7 @@ get:
 post:
   description:
   tags:
-    - '[Server-Side Only] Collections'
+    - Collections *
   requestBody:
     content:
       application/json:
@@ -124,7 +124,7 @@ post:
 delete:
   description:
   tags:
-    - '[Server-Side Only] Collections'
+    - Collections *
   parameters:
     - $ref: '../../components/parameters/query.yml#/CollectionsDeleteParams/collection_name'
     - $ref: '../../components/parameters/query.yml#/CollectionsDeleteParams/ids'

@@ -5,7 +5,7 @@ post:
     Can't include add_targets or removedTargets if you're also including newTargets.
     Can't have the same feed ID in addedTargets and removedTargets.
   tags:
-    - '[Server-Side Only] Feed'
+    - Feed *
   parameters:
     - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
     - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'

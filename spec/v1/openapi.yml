@@ -112,6 +112,20 @@ servers:
 security:
   - bearerAuth: []
   - api_key: []
+tags:
+  - name: User
+  - name: User *
+    description: server-side only
+  - name: Feed
+  - name: Feed *
+    description: server-side only
+  - name: Activity
+  - name: Activity *
+    description: server-side only
+  - name: Reaction
+  - name: Collections
+  - name: Collections *
+    description: server-side only
 paths:
   $ref: 'paths/_index.yml'
 components:

@@ -1,7 +1,7 @@
 post:
   description: Follow multiple feeds with one API call
   tags:
-    - '[Server-Side Only] Feed | Batch Operations'
+    - Feed *
   parameters:
     - $ref: '../../components/parameters/common.yml#/x-stream-client'
     - $ref: '../../components/parameters/common.yml#/stream-auth-type'

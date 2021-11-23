@@ -42,7 +42,7 @@ get:
 put:
   description:
   tags:
-    - '[Server-Side Only] Collections'
+    - Collections *
   requestBody:
     content:
       application/json:
@@ -79,7 +79,7 @@ put:
 delete:
   description:
   tags:
-    - '[Server-Side Only] Collections'
+    - Collections *
   responses:
     200:
       description: OK

@@ -6,7 +6,7 @@ post:
     For updating only parts of one or more activities by changing,
     adding, or removing fields.
   tags:
-    - '[Server-Side Only] Activity'
+    - Activity *
   requestBody:
     required: true
     content:

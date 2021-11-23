@@ -4,7 +4,6 @@ get:
   tags:
     - Feed
   parameters:
-#    - $ref: '../../../components/parameters/query.yml#/FeedContextOptions/user_id'
     - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
     - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'
     - $ref: '../../../components/parameters/common.yml#/x-stream-client'
