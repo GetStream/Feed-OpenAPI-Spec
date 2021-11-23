@@ -1,6 +1,5 @@
 get:
-  descrition: |
-    ''
+  descrition: Read feed contents
   tags:
     - Feed
   parameters:

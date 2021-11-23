@@ -55,7 +55,7 @@ get:
     403:
       $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
 post:
-  description:
+  description: Upsert one or more items within a collection.
   tags:
     - Collections *
   requestBody:
@@ -122,7 +122,7 @@ post:
     403:
       $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
 delete:
-  description:
+  description: Remove all objects by id from the collection.
   tags:
     - Collections *
   parameters:

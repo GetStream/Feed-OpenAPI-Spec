@@ -4,7 +4,7 @@ parameters:
   - $ref: '../../components/parameters/path.yml#/CollectionPathParameters/collection_name'
   - $ref: '../../components/parameters/path.yml#/CollectionPathParameters/id'
 get:
-  description:
+  description: Get item from collection
   tags:
     - Collections
   responses:
@@ -40,7 +40,7 @@ get:
             duration: 5.47ms
             more_info: https://getstream.io/docs/api_error_responses
 put:
-  description:
+  description: Update entry in the collection
   tags:
     - Collections *
   requestBody:
@@ -77,7 +77,7 @@ put:
     403:
       $ref: '../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'
 delete:
-  description:
+  description: Delete entry from collection
   tags:
     - Collections *
   responses:

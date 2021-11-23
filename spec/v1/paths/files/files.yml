@@ -2,7 +2,7 @@ parameters:
   - $ref: '../../components/parameters/common.yml#/x-stream-client'
   - $ref: '../../components/parameters/common.yml#/stream-auth-type'
 post:
-  description:
+  description: Upload a File instance.
   tags:
     - Files
   requestBody:
@@ -39,7 +39,7 @@ post:
             duration: 0.16ms
             more_info: https://getstream.io/docs/api_error_responses
 delete:
-  description: Delete file. The user can delete only own uplaoded images. Seet the HTTP response status 403.
+  description: Delete file. The user can delete only own uploaded images. Seet the HTTP response status 403.
   tags:
     - Files
   parameters:

@@ -1,6 +1,6 @@
 post:
   description: |
-    Updates an activity's `to` field.
+    Updates an activity's `to` fields
     Requires you to provide at least one parameter for `newTargets`, `addedTargets`, or `removedTargets`.
     Can't include add_targets or removedTargets if you're also including newTargets.
     Can't have the same feed ID in addedTargets and removedTargets.

@@ -4,8 +4,7 @@ parameters:
   - $ref: '../../components/parameters/common.yml#/x-stream-client'
   - $ref: '../../components/parameters/common.yml#/stream-auth-type'
 post:
-  descrition: |
-    'Create an activity in a given feed'
+  descrition: Create an activity in a given feed
   tags:
     - Feed
   requestBody:
@@ -49,8 +48,7 @@ post:
       $ref: '../../components/examples/ErrorAPIResponse.yml#/ForbiddenInsufficientPermissions'
 
 get:
-  descrition: |
-    ''
+  descrition: Read the feed contents. Returned result contains non-enriched activities.
   tags:
     - Feed
   parameters:

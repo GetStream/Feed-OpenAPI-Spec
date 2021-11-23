@@ -1,5 +1,5 @@
 delete:
-  description: ''
+  description: Removes the activity by activityId or foreignId
   tags:
     - Feed
   parameters:
