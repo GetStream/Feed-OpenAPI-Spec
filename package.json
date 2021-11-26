@@ -4,7 +4,7 @@
   "main": "server/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon --watch server --watch build",
+    "dev": "yarn spec:build && NODE_ENV=development nodemon --watch server --watch build",
     "spec:build": "swagger-cli bundle --dereference spec/v1/openapi.yml --outfile build/openapi.yml --type yaml",
     "postinstall": "yarn spec:build"
   },
