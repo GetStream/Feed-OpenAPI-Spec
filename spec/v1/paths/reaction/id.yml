@@ -1,0 +1,148 @@
+parameters:
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+    description: Reaction id
+get:
+  description: Get reaction by its ID.
+  tags:
+    - Reaction
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/EnrichedReactionAPIResponse'
+          example:
+            created_at: '2021-11-19T12:42:49.065836Z'
+            updated_at: '2021-11-19T12:42:49.065836Z'
+            id: 2e0d42e2-4936-11ec-8799-a4bb6d26ac2f
+            user_id: MustermannMax
+            user:
+              created_at: '2021-10-07T11:17:54.858890Z'
+              updated_at: '2021-10-07T11:17:54.858890Z'
+              id: MustermannMax
+              data:
+                about: null
+                banner_url: null
+                email: max.muster@email.com
+                feedGroup: timeline
+                first_name: Max
+                handle: MustermannMax
+                id: 9beb4f6e-2139-4ccd-9401-4886bccd8e77
+                joined: '2021-10-06T22:00:00.000Z'
+                last_name: Mustermann
+                name: Max Mustermann
+                profileImage: null
+                website: null
+            kind: comment
+            activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+            data:
+              attachments:
+                files: [ ]
+                images: [ ]
+              text: Reaction to Lorem ipsum comment
+            target_feeds:
+              - user:DoeJoe
+              - user:DoeJane
+            parent: f7547cac-491c-11ec-87dd-a4bb6d26ac2f
+            latest_children: { }
+            children_counts: { }
+            duration: 2.91ms
+    404:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/404'
+put:
+  description: |
+    Update reaction. It is not possible to update `kind`.
+    If `data` not specified in the request body, then it is set to `null`.
+  tags:
+    - Reaction
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/Reaction.yml#/ReactionBody'
+        examples:
+          Update id:
+            description: It is possible to update id only if JWT has admin permissions set. Otherwise 403 is returned.
+            value:
+              id: f0af7f3c-493f-11ec-97e2-a4bb6d26ac2f
+          Update other attributes:
+            value:
+              data:
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                text: Changed reaction to Lorem ipsum comment
+          Update non-existent attributes:
+            description: |
+              Only the key `data` is impacted if not provided in the request body by being set to null.
+              The rest of the data rests unchaged.
+            value:
+              ata:
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                text: Changed reaction to Lorem ipsum comment
+  responses:
+    201:
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/EnrichedReactionAPIResponse'
+          examples:
+            Update other attributes:
+              created_at: '2021-11-19T14:20:02.167649Z'
+              updated_at: '2021-11-19T14:21:25.807420Z'
+              id: bad113c2-4943-11ec-8278-a4bb6d26ac2f
+              user_id: MustermannMax
+              user:
+                created_at: '2021-10-07T11:17:54.858890Z'
+                updated_at: '2021-10-07T11:17:54.858890Z'
+                id: MustermannMax
+                data:
+                  about: null
+                  banner_url: null
+                  email: max.muster@email.com
+                  feedGroup: timeline
+                  first_name: Max
+                  handle: MustermannMax
+                  id: 9beb4f6e-2139-4ccd-9401-4886bccd8e77
+                  joined: '2021-10-06T22:00:00.000Z'
+                  last_name: Mustermann
+                  name: Max Mustermann
+                  profileImage: null
+                  website: null
+              kind: comment
+              activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+              data:
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                text: Changed reaction to Lorem ipsum comment
+              parent: 2e0d42e2-4936-11ec-8799-a4bb6d26ac2f
+              latest_children: { }
+              children_counts: { }
+              duration: 29.60ms
+    404:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/404'
+delete:
+  description: Remove reaction by its ID.
+  tags:
+    - Reaction
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            duration: "19.11ms"
+    404:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/404'
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'

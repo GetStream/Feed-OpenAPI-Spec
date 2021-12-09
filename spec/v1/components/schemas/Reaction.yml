@@ -1,0 +1,92 @@
+Reaction:
+  required:
+    - activity_id
+    - created_at
+    - data
+    - id
+    - kind
+    - parent
+    - updated_at
+    - user_id
+  properties:
+    activity_id:
+      type: string
+    created_at:
+      type: string
+    data:
+      type: #T
+    id:
+      type: string
+    kind:
+      type: string
+    parent:
+      type: string
+    updated_at:
+      type: string
+    user_id:
+      type: string
+    target_fields:
+      type: array
+      items:
+        type: string
+    target_fields_extra_data:
+      type: object
+      additionalProperties: true
+ReactionBody:
+  properties:
+    activity_id:
+      type: string
+    data:
+      type: object
+    id:
+      type: string
+      description: API will generate an id if it's missing
+    kind:
+      type: string
+      description: Required only for add/addChile, not update
+    parent:
+      type: string
+      description: Only required for child reactions
+    target_feeds:
+      type: array
+      items:
+        type: string
+      description: An array of feeds (IDs) to which to send an activity with the reaction
+    target_feeds_extra_data:
+      type: object
+      description: TargetFeedsExtraData;
+    user_id:
+      type: string;
+      description: Can be used only if the JWT does not contain `user_id` claim
+EnrichedReaction:
+  allOf:
+    - $ref: '#/Reaction'
+    - type: object
+      required:
+        - children_counts
+        - latest_children
+      properties:
+        children_counts:
+          type: object
+          additionalProperties:
+            type: number
+        latest_children:
+          type: object
+          additionalProperties:
+            type: #ChildReactionType
+        latest_children_extra:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        own_children:
+          type: object
+          additionalProperties:
+            type: #ChildReactionType
+        user:
+          type: #EnrichedUser
+ReactionRecords:
+  type: object
+  additionalProperties:
+    $ref: '#/EnrichedReaction'

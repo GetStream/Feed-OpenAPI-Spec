@@ -1,0 +1,44 @@
+delete:
+  description: Unfollow the given feed
+  tags:
+    - Feed
+  parameters:
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/target_feed_id'
+    - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
+    - in: query
+      name: keep_history
+      required: false
+      schema:
+        type: string
+        enum: [ '1' ]
+      description: When provided the activities from target feed will not be kept in the feed
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            duration: "12.54ms"
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Invalid feed id:
+              description: The target feed id is ill formed in the URL path.
+              value:
+                detail: '"user" is not a valid feed'
+                status_code: 400
+                code: 4
+                exception: InputException
+                duration: 0.15ms
+                more_info: https://getstream.io/docs/api_error_responses
+    '403':
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'

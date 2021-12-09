@@ -1,0 +1,111 @@
+parameters:
+  - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
+  - $ref: '../../../components/parameters/path.yml#/UserPathParameters/id'
+get:
+  description: Get the user data
+  tags:
+    - User
+  parameters:
+      - $ref: '../../../components/parameters/query.yml#/GetUserOptions/with_follow_counts'
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/UserAPIResponse'
+          example:
+            created_at: '2021-10-07T11:17:54.858890Z'
+            updated_at: '2021-10-07T11:17:54.858890Z'
+            id: MustermannMax
+            data:
+              about: null
+              banner_url: null
+              email: max.muster@email.com
+              feedGroup: timeline
+              first_name: Max
+              handle: MustermannMax
+              id: 9beb4f6e-2139-4ccd-9401-4886bccd8e77
+              joined: '2021-10-06T22:00:00.000Z'
+              last_name: Mustermann
+              name: Max Mustermann
+              profileImage: null
+              website: null
+            followers_count: 2
+            following_count: 2
+            duration: 3.34ms
+    404:
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/404'
+put:
+  description: |
+    Request with user JWT can update only their data, see response HTTP status 403.
+  tags:
+    - User
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            data:
+              $ref: '../../../components/schemas/User.yml#/EnrichedUser/properties/data'
+        example:
+          data:
+            about: abcde
+            banner_url: null
+            email: anne.smith@email.com
+            first_name: Anne
+            handle: SmithAnne
+            id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+            joined: '2021-10-30T22:00:00.000Z'
+            last_name: Smith
+            name: Anne Smith
+            profileImage: |
+              https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODgyNTY5OH19fV19&Signature=JQxcd22BysT5jxAX0cuo4BdlhWBPHHuBbhQuTJ2ZTbwFpj45dd8sq1fF4raG7czXGsi2k9YDtcJ8HG0LdjDUU~cLHlMWdZBBskW87jgfvlW5vldHeOiXWcAzO18eVrSw8jvaxUGSsT1RTJGSuFzaLih4et1FQ2L3nPECkBXknmnJmVu8TTHF57Aqv9ZpBGhWQGzMScwxqfTmpanBXNVfA81qqyulVZ9ImmtuGPrPRvbkXZrZJ2BBiT7vcGOMO3lYJrSsIj0AsfTA~uRnj3vg4ozVmsEXBpE3cSqEarYxEjNrh-P3DFD~2ld1Ucntf32fKtJvXTempjMw8mkzKZ1DPA__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+            website: anne.com
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/UserAPIResponse'
+          example:
+            created_at: '2021-10-07T11:18:29.562418Z'
+            updated_at: '2021-11-22T21:24:24.899839Z'
+            id: SmithAnne
+            data:
+              about: abcde
+              banner_url: null
+              email: anne.smith@email.com
+              first_name: Anne
+              handle: SmithAnne
+              id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+              joined: '2021-10-30T22:00:00.000Z'
+              last_name: Smith
+              name: Anne Smith
+              profileImage: >
+                https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODgyNTg2NH19fV19&Signature=Qkw526q6n~hMf33b3UBiFlqIngREI4UVF3c8SCcFs3NYN9lvzMtYOQnpo~KW6vwkOfx7L1VxRX65gWtrKcBDRhZ-tuZkF283gfHWIwYWJtdLyZYjvYwt77VUUfxDp3TrqeBH-dPD~VQMuT1QcGD-EZOX9Zv8Nol5NDNqTZqrhAXTp4yNkPa9fpC2j840ptfLN0k7XJdvJhHq6xRVhhgmvfUj9p5ftFq~7b3O~iAQOPz93MQakqPhlYNe6qRnOZGRCrF5gyiRCs~KbyTMZqXi~TpJne8N4s59keSHjYRpiSLutihuxFAq8ey6YPhnFcwx2V1SaMYM~tkpsrrlFi~LRA__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+              website: anne.com
+            duration: 5.47ms
+    403:
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'
+    404:
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/404'
+delete:
+  description: Delete the user. User can delete only own record, see reponse HTTP status 403.
+  tags:
+    - User
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            duration: "4.67ms"
+    403:
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'
+    404:
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/404'

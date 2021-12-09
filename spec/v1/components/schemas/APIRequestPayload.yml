@@ -1,0 +1,18 @@
+CollectionsUpsertPayload:
+  data:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        $ref: 'Collection.yml#/NewCollectionEntry'
+CollectionAddPayload:
+  id:
+    type: string
+  data:
+    $ref: 'Collection.yml#/BaseCollection/properties/data'
+CollectionUpdatePayload:
+  data:
+    $ref: 'Collection.yml#/BaseCollection/properties/data'
+UserCreatePayload:
+  id: string;
+  data: 'User.yml#/EnrichedUser/properties/data'

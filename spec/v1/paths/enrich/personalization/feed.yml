@@ -1,0 +1,53 @@
+get:
+  description: 'The `user_id` query parameter has to be provided if the JWT does not contain `user_id` claim.'
+  tags:
+    - Feed
+  parameters:
+    - $ref: '../../../components/parameters/query.yml#/FeedContextOptions/user_id'
+    - $ref: '../../../components/parameters/query.yml#/FeedPaginationOptions/id_gt'
+    - $ref: '../../../components/parameters/query.yml#/FeedPaginationOptions/id_gte'
+    - $ref: '../../../components/parameters/query.yml#/FeedPaginationOptions/id_lt'
+    - $ref: '../../../components/parameters/query.yml#/FeedPaginationOptions/id_lte'
+    - $ref: '../../../components/parameters/query.yml#/FeedPaginationOptions/limit'
+    - $ref: '../../../components/parameters/query.yml#/EnrichOptions/withRecentReactions'
+    - $ref: '../../../components/parameters/query.yml#/EnrichOptions/recentReactionsLimit'
+    - $ref: '../../../components/parameters/query.yml#/EnrichOptions/withOwnReactions'
+    - $ref: '../../../components/parameters/query.yml#/EnrichOptions/withReactionCounts'
+    - $ref: '../../../components/parameters/query.yml#/RankedFeedOptions/offset'
+    - $ref: '../../../components/parameters/query.yml#/RankedFeedOptions/ranking'
+    - $ref: '../../../components/parameters/query.yml#/RankedFeedOptions/session'
+    - $ref: '../../../components/parameters/query.yml#/NotificationFeedOptions/mark_read'
+    - $ref: '../../../components/parameters/query.yml#/NotificationFeedOptions/mark_seen'
+    - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
+  responses:
+    '200':
+      summary: OK
+      description: Returns a list of activities for a given feed.
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/PersonalizationFeedAPIResponse'
+          examples:
+            No URL Query Params:
+              value:
+                $ref: '../../../components/examples/APIResponse.yml#/PersonalizationFeedAPIResponse'
+            With Enrich Options:
+              description: Example showing only the first item of the `results` array
+              value:
+                $ref: '../../../components/examples/APIResponse.yml#/PersonalizationFeedAPIResponseEnriched'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          examples:
+            Missing user_id:
+              value:
+                detail: "The parameter 'user_id' is required for this endpoint."
+                status_code: 400
+                code: 0
+                exception: ""
+                duration: "55.14ms"
+                more_info: "https://getstream.io/docs/api_error_responses"

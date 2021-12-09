@@ -1,0 +1,249 @@
+APIResponse:
+  properties:
+    duration:
+      type: string
+ErrorAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - detail
+        - status_code
+        - code
+        - exception
+        - more_info
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+        code:
+          type: integer
+        exception:
+          type: string
+        more_info:
+          type: string
+FieldsErrorAPIResponse:
+  allOf:
+    - $ref: '#/ErrorAPIResponse'
+    - exception_fields:
+        type: object
+        description: 'Keys are field names. Values are arrays of error strings.'
+PaginatedFeedAPIResponse:
+  type: object
+  required:
+    - limit
+    - next
+    - offset
+    - results
+    - version
+  properties:
+    limit:
+      type: number
+    next:
+      type: string
+    offset:
+      type: number
+    results:
+      type: array
+      items:
+        $ref: 'Activity.yml#/FlatActivityEnriched'
+    version:
+      type: string
+FileUploadAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+RefreshUrlAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+NotEnrichedActivityFeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - next
+        - results
+      properties:
+        next:
+          type: string
+        results:
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivity'
+EnrichedActivityFeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - next
+        - results
+      properties:
+        next:
+          type: string
+        results:
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivityEnriched'
+FeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - next
+        - results
+      properties:
+        next:
+          type: string
+        results:
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/AggregatedActivityEnriched'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/NotificationActivityEnriched'
+        unread:
+          type: number
+        unseen:
+          type: number
+PersonalizationFeedAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: '#/PaginatedFeedAPIResponse'
+GetActivitiesAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - results
+      properties:
+        results:
+          oneOf:
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivity'
+            - type: array
+              items:
+                $ref: 'Activity.yml#/FlatActivityEnriched'
+PostActivityAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Activity.yml#/Activity'
+DeleteActivityAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - removed:
+        type: string
+OGAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Og.yml#/OGData'
+GetFollowAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      required:
+        - results
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              created_at:
+                type: string
+              feed_id:
+                type: string
+              target_id:
+                type: string
+              updated_at:
+                type: string
+EnrichedReactionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Reaction.yml#/EnrichedReaction'
+ReactionFilterAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      properties:
+        next:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: 'Reaction.yml#/EnrichedReaction'
+        activity:
+          $ref: 'Activity.yml#/EnrichedActivity'
+CollectionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'Collection.yml#/CollectionResponse'
+SelectCollectionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - type: object
+      properties:
+        response:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                allOf:
+                  - $ref: 'Collection.yml#/CollectionResponse'
+
+UpsertCollectionAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'APIRequestPayload.yml#/CollectionsUpsertPayload'
+UserAPIResponse:
+  allOf:
+    - $ref: '#/APIResponse'
+    - $ref: 'User.yml#/EnrichedUser'
+    - object:
+      properties:
+        followers_count:
+          type: number
+          required: false
+        following_count:
+          type: number
+          required: false

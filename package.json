@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "yarn spec:build && NODE_ENV=development nodemon --watch server --watch build",
+    "spec:build": "swagger-cli bundle --dereference spec/v1/openapi.yml --outfile build/openapi.yml --type yaml",
+    "postinstall": "yarn spec:build"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4",
+    "express": "^4.17.1",
+    "swagger-cli": "^4.0.4",
+    "swagger-ui-express": "latest",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/swagger-ui-express": "^4.1.3",
+    "nodemon": "^2.0.14"
+  }
+}

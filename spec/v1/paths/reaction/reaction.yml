@@ -1,0 +1,248 @@
+post:
+  description: Add new reaction
+  tags:
+    - Reaction
+  parameters:
+    - $ref: '../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/Reaction.yml#/ReactionBody'
+        examples:
+          Create Reaction (required props):
+            value:
+              activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+              kind: like
+          Create Reaction (all props):
+            description: The `user_id` key can be used only if the JWT does not contain `user_id` claim
+            value:
+              id: f7547cac-491c-11ec-87dd-a4bb6d26ac2f
+              activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+              kind: comment
+              data:
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                text: Lorem ipsum
+              target_feeds:
+                - user:DoeJoe
+                - user:DoeJane
+              user_id: MustermannMax
+              target_feeds_extra_data:
+                origin: timeline:SmithAnne
+          Create child reaction (required props):
+            value:
+              parent: f7547cac-491c-11ec-87dd-a4bb6d26ac2f
+              kind: like
+          Create child reaction (all props):
+            description: The `user_id` key can be used only if the JWT does not contain `user_id` claim
+            value:
+              id: 2e0d42e2-4936-11ec-8799-a4bb6d26ac2f
+              activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+              parent: f7547cac-491c-11ec-87dd-a4bb6d26ac2f
+              kind: comment
+              data:
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                text: Reaction to Lorem ipsum comment
+              target_feeds:
+                - user:DoeJoe
+                - user:DoeJane
+              user_id: MustermannMax
+              target_feeds_extra_data:
+                origin: timeline:SmithAnne
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/EnrichedReactionAPIResponse'
+          examples:
+            Create Reaction (required props):
+              value:
+                created_at: '2021-11-19T10:02:14.234002Z'
+                updated_at: '2021-11-19T10:02:14.234002Z'
+                id: 3a481863-5332-4908-a866-461757a51808
+                user_id: SmithAnne
+                user:
+                  created_at: '2021-10-07T11:18:29.562418Z'
+                  updated_at: '2021-11-16T14:40:48.165830Z'
+                  id: SmithAnne
+                  data:
+                    about: abcde
+                    banner_url: null
+                    email: anne.smith@email.com
+                    first_name: Anne
+                    handle: SmithAnne
+                    id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                    joined: '2021-10-30T22:00:00.000Z'
+                    last_name: Smith
+                    name: Anne Smith
+                    profileImage: >-
+                      https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODUyNTczNH19fV19&Signature=JCLwu8fmCahJdpyIF1TAzmNXliByk7zI6BINzkOXgsAe35q7d-Bz5jhXQ8aUByBWPIsyxspMVi9K~K-oQs2pEVrFU9S8zhqGIE-3twKjCF8U1MPocLMAbP2SXXn1C4XYu7KAsmJ9soRoU6TNUIPBhQsiPvxVQNXZqsBkQaC8yzi5Hy~FLnhaqkv0kKXta2WlJ3vEVwHcvPYm45vCp-m50M-N2WeSaY9XrctYlav5C3Nlyg0eUEWxIj~54gPE6K3JH40dMEBNX43HYAQtkQTGszQYSF2NRdAATTd4CHW6d5~3S14XVKyDfp075~UCwhOi19RDLh4V6UZGwdpzOcB~gg__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                    website: null
+                kind: like
+                activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+                data: { }
+                parent: ''
+                latest_children: { }
+                children_counts: { }
+                duration: 8.91ms
+            Create Reaction (all props):
+              value:
+                created_at: '2021-11-19T12:34:25.385922Z'
+                updated_at: '2021-11-19T12:34:25.385922Z'
+                id: f7547cac-491c-11ec-87dd-a4bb6d26ac2f
+                user_id: MustermannMax
+                user:
+                  created_at: '2021-10-07T11:17:54.858890Z'
+                  updated_at: '2021-10-07T11:17:54.858890Z'
+                  id: MustermannMax
+                  data:
+                    about: null
+                    banner_url: null
+                    email: max.muster@email.com
+                    feedGroup: timeline
+                    first_name: Max
+                    handle: MustermannMax
+                    id: 9beb4f6e-2139-4ccd-9401-4886bccd8e77
+                    joined: '2021-10-06T22:00:00.000Z'
+                    last_name: Mustermann
+                    name: Max Mustermann
+                    profileImage: null
+                    website: null
+                kind: comment
+                activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+                data:
+                  attachments:
+                    files: [ ]
+                    images: [ ]
+                  text: Lorem ipsum
+                target_feeds:
+                  - user:DoeJoe
+                  - user:DoeJane
+                target_feeds_extra_data:
+                  origin: timeline:SmithAnne
+                parent: ''
+                latest_children: { }
+                children_counts: { }
+                duration: 19.00ms
+            Create child reaction (required props):
+              value:
+                created_at: '2021-11-19T12:36:50.192755Z'
+                updated_at: '2021-11-19T12:36:50.192755Z'
+                id: 7c7e1556-43e3-44e3-bcfa-69954fe14da7
+                user_id: SmithAnne
+                user:
+                  created_at: '2021-10-07T11:18:29.562418Z'
+                  updated_at: '2021-11-16T14:40:48.165830Z'
+                  id: SmithAnne
+                  data:
+                    about: abcde
+                    banner_url: null
+                    email: anne.smith@email.com
+                    first_name: Anne
+                    handle: SmithAnne
+                    id: 654ccfa3-4dff-4e0e-bb00-a7306566f69c
+                    joined: '2021-10-30T22:00:00.000Z'
+                    last_name: Smith
+                    name: Anne Smith
+                    profileImage: >-
+                      https://us-east.stream-io-cdn.com/1145265/images/69cbf62a-d488-45c6-a3b4-d48acb424f91.03TB-KINGFISHER1-mediumSquareAt3X.jpg?Key-Pair-Id=APKAIHG36VEWPDULE23Q&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy1lYXN0LnN0cmVhbS1pby1jZG4uY29tLzExNDUyNjUvaW1hZ2VzLzY5Y2JmNjJhLWQ0ODgtNDVjNi1hM2I0LWQ0OGFjYjQyNGY5MS4wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnP2Nyb3A9KiZkbD0wM1RCLUtJTkdGSVNIRVIxLW1lZGl1bVNxdWFyZUF0M1guanBnJmg9KiZyZXNpemU9KiZybz0wJnc9KiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYzODUzNTAxMH19fV19&Signature=Mrw~jgbYbC4-y3c3wGAhjZCKm-Uhpnzf-5~OGn~I3TMf50zkXtLugbwmBcvmyAPHfb0a-FxeAj4Knr7~LdKYKMh8FeoStn8xX~TT-Fzoa7hMm4TkfwFfrALMsSX-f0SsbvMXFKlQzwK7aafhMOpmhjOXlKL~ePZmcCTqGRkPSVEvnrCFPiI1p27wQuOdBMNbv28W-B5eCxGaX6MXa27U8qm5H0GwdFaLCbDSdnzrIupCZntcNj1HFY8j-6wXGBkqipxBRZmQbknHtfLSZthh4YyREDyp6irrGZqwEDWhbrMppUtbFbG529qJIbIFhknuKM0oJXDJvVnzGxL~ckhYKw__&crop=*&dl=03TB-KINGFISHER1-mediumSquareAt3X.jpg&h=*&resize=*&ro=0&w=*
+                    website: null
+                kind: like
+                activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+                data: { }
+                parent: f7547cac-491c-11ec-87dd-a4bb6d26ac2f
+                latest_children: { }
+                children_counts: { }
+                duration: 9.50ms
+            Create child reaction (all props):
+              value:
+                created_at: '2021-11-19T12:39:23.265168Z'
+                updated_at: '2021-11-19T12:39:23.265168Z'
+                id: 2e0d42e2-4936-11ec-8799-a4bb6d26ac2f
+                user_id: MustermannMax
+                user:
+                  created_at: '2021-10-07T11:17:54.858890Z'
+                  updated_at: '2021-10-07T11:17:54.858890Z'
+                  id: MustermannMax
+                  data:
+                    about: null
+                    banner_url: null
+                    email: max.muster@email.com
+                    feedGroup: timeline
+                    first_name: Max
+                    handle: MustermannMax
+                    id: 9beb4f6e-2139-4ccd-9401-4886bccd8e77
+                    joined: '2021-10-06T22:00:00.000Z'
+                    last_name: Mustermann
+                    name: Max Mustermann
+                    profileImage: null
+                    website: null
+                kind: comment
+                activity_id: 64325227-489c-11ec-8823-0ac74274a1c1
+                data:
+                  attachments:
+                    files: [ ]
+                    images: [ ]
+                  text: Reaction to Lorem ipsum comment
+                target_feeds:
+                  - user:DoeJoe
+                  - user:DoeJane
+                target_feeds_extra_data:
+                  origin: timeline:SmithAnne
+                parent: f7547cac-491c-11ec-87dd-a4bb6d26ac2f
+                latest_children: { }
+                children_counts: { }
+                duration: 16.69ms
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+              - $ref: '../../components/schemas/APIResponse.yml#/FieldsErrorAPIResponse'
+          examples:
+            With user_id:
+              description: Error returned if request sent with JWT that contains `user_id` claim
+              value:
+                detail: user_id is read only
+                status_code: 400
+                code: 4
+                exception: InputException
+                duration: 0.15ms
+                more_info: https://getstream.io/docs/api_error_responses
+            Without user_id:
+              description: |
+                Error returned if request payload is missing `user_id` key as well as
+                the admin JWT does not contain `user_id` claim
+              value:
+                detail: Errors for fields 'user_id'
+                status_code: 400
+                code: 4
+                exception: InputException
+                exception_fields:
+                  user_id:
+                    - user_id is a required field
+                duration: 0.16ms
+                more_info: https://getstream.io/docs/api_error_responses
+    409:
+      description: Already exists
+      content:
+        application/json:
+          schema:
+            - $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          example:
+            detail: unable to create a new reaction
+            status_code: 409
+            code: 22
+            exception: ConflictException
+            duration: 3.57ms
+            more_info: https://getstream.io/docs/api_error_responses
+

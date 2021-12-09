@@ -1,0 +1,72 @@
+OGResource:
+  secure_url:
+    type: string
+  type:
+    type: string
+  url:
+    type: string
+OGAudio:
+  $ref: '#/OGResource'
+  audio:
+    type: string
+OGImage:
+  $ref: '#/OGResource'
+  alt:
+    type: string
+  height:
+    type: number
+  image:
+    type: string
+    description: Image URL
+  width:
+    type: number
+OGVideo:
+  $ref: '#/OGResource'
+  height:
+    type: number
+  video:
+    type: string
+    description: Video URL
+  width:
+    type: number
+OGData:
+  properties:
+    audios:
+      type: array
+      items:
+        type: object
+        properties:
+          $ref: '#/OGAudio'
+    description:
+      type: string
+    determiner:
+      type: string
+    favicon:
+      type: string
+    images:
+      type: array
+      items:
+        type: object
+        properties:
+          $ref: '#/OGImage'
+    locale:
+      type: string
+    original_url:
+      type: string
+    site:
+      type: string
+    site_name:
+      type: string
+    title:
+      type: string
+    type:
+      type: string
+      description: "e.g. video.movie"
+    url:
+      type: string
+    videos:
+      type: array
+      items:
+        type: object
+        properties:
+          $ref: '#/OGVideo'

@@ -1,0 +1,7 @@
+BaseFollowRelation:
+  type: object
+  properties:
+    source:
+      type: string
+    target:
+      type: string

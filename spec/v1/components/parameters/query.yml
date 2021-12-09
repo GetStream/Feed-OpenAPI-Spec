@@ -1,0 +1,303 @@
+GetActivitiesOptions:
+  ids:
+    in: query
+    name: ids
+    required: false
+    schema:
+      type: array
+      maxItems: 100
+      items:
+        type: string
+    style: form
+    explode: false
+    description: |
+      A comma separated list of activity IDs. Maximum length is 100.
+  foreign_ids:
+    in: query
+    name: foreign_ids
+    required: false
+    schema:
+      type: array
+      maxItems: 100
+      items:
+        type: string
+    description: |
+      A comma separated list of activity foreign IDs.
+      Maximum length is 100, and must match the length of `timestamps`.
+  timestamps:
+    in: query
+    name: timestamps
+    required: false
+    schema:
+      type: array
+      maxItems: 100
+      items:
+        type: string
+    description: |
+      A comma separated list of activity timestamps.
+      Maximum length is 100, and must match the length of `foreign_ids`.
+FeedPaginationOptions:
+  id_gt:
+    in: query
+    name: id_gt
+    required: false
+    schema:
+      type: string
+    description: Filter activities created **later** than the activity with the given `id`.
+  id_gte:
+    in: query
+    name: id_gte
+    required: false
+    schema:
+      type: string
+    description: Filter activities created **later** than and including the activity with the given `id`.
+  id_lt:
+    in: query
+    name: id_lt
+    required: false
+    schema:
+      type: string
+    description: Filter activities created **sooner** than the activity with the given `id`.
+  id_lte:
+    in: query
+    name: id_lte
+    required: false
+    schema:
+      type: string
+    description: |
+      Filter activities created **sooner** than and including the activity with the given `id`.
+  limit:
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: number
+    description: |
+      The returned array will contain this many items.
+      If not specified, resulting array will contain 25 items.
+EnrichOptions:
+  withRecentReactions:
+    in: query
+    name: withRecentReactions
+    required: false
+    schema:
+      type: boolean
+    description: |
+      If true activity object will have attribute `latest_reactions`
+      that contains list of recently created reactions
+  recentReactionsLimit:
+    in: query
+    name: recentReactionsLimit
+    required: false
+    schema:
+      type: integer
+      maximum: 25
+    description: |
+      Specify number of reactions in the `latest_reactions` attribute,
+      maximum value is 25.
+  withOwnReactions:
+    in: query
+    name: withOwnReactions
+    required: false
+    schema:
+      type: boolean
+    description: |
+      If true activity object will have attribute `own_reactions`
+      that contains list of reactions created by the user himself.
+  withReactionCounts:
+    in: query
+    name: withReactionCounts
+    required: false
+    schema:
+      type: boolean
+    description: |
+      If true activity object will have attribute `reaction_counts`
+      that contains number of reactions for each kind
+RankedFeedOptions:
+  offset:
+    in: query
+    name: 'offset'
+    required: false
+    schema:
+      type: integer
+    description: 'TODO description'
+  ranking:
+    in: query
+    name: 'ranking'
+    required: false
+    schema:
+      type: string
+    description: 'TODO description'
+  session:
+    in: query
+    name: 'session'
+    required: false
+    schema:
+      type: string
+    description: 'TODO description'
+NotificationFeedOptions:
+  mark_read:
+    in: query
+    name: mark_read
+    required: false
+    schema:
+      oneOf:
+        - type: boolean
+        - type: string
+          enum: [ current ]
+        - type: array
+          items:
+            type: string
+    description: 'Notification feed option. Possible values are boolean (true / false), array of strings or string "current".'
+  mark_seen:
+    in: query
+    name: mark_seen
+    required: false
+    schema:
+      oneOf:
+        - type: boolean
+        - type: string
+          enum: [ current ]
+        - type: array
+          items:
+            type: string
+    description: 'Notification feed option. Possible values are boolean (true / false), array of strings or string "current".'
+FeedContextOptions:
+  user_id:
+    in: query
+    name: user_id
+    required: false
+    schema:
+      type: string
+    description: |
+      Provide `user_id` to retrieve information related to the given user only.
+      For example activity object with the key `own_reactions` would list only
+      reactions created by the user with the given `user_id`. Is required if the JWT
+      does not include `user_id` claim.
+GetFollowOptions:
+  filter:
+    in: query
+    name: filter
+    required: false
+    schema:
+      type: array
+      items:
+        type: string
+    style: form
+    explode: false
+    description: Array of feed id (`<feed_slug>:<user_id>`) to filter on
+  limit:
+    $ref: '#/FeedPaginationOptions/limit'
+  offset:
+    $ref: '#/RankedFeedOptions/offset'
+ReactionFilterConditions:
+  id_gt:
+    in: query
+    name: id_gt
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **later** than the activity with the given `id`.
+  id_gte:
+    in: query
+    name: id_gte
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **later** than and including the activity with the given `id`.
+  id_lt:
+    in: query
+    name: id_lt
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **sooner** than the activity with the given `id`.
+  id_lte:
+    in: query
+    name: id_lte
+    required: false
+    schema:
+      type: string
+    description: Filter reactions created **sooner** than and including the activity with the given `id`.
+  limit:
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: number
+    description: |
+      The returned array will contain this many items.
+      If not specified, resulting array will contain 25 items.
+  with_activity_data:
+    in: query
+    name: with_activity_data
+    required: false
+    schema:
+      type: boolean
+    description:
+  with_own_children:
+    in: query
+    name: with_own_children
+    required: false
+    schema:
+      type: boolean
+    description:
+CollectionsDeleteParams:
+  collection_name:
+    in: query
+    name: collection_name
+    required: true
+    schema:
+      type: string
+  ids:
+    in: query
+    name: ids
+    required: true
+    schema:
+      type: string
+    description: Item IDs separated by comma
+ImageProcessOptions:
+  crop:
+    in: query
+    name: crop
+    required: false
+    schema:
+      type: string
+      enum: ['top', 'bottom', 'left', 'right', 'center']
+      default: center
+    description: The cropping mode
+  resize:
+    in: query
+    name: resize
+    required: false
+    schema:
+      type: string
+      enum:  ['clip', 'crop', 'scale', 'fill']
+      default: 'clip'
+    description: The strategy used to adapt the image the new dimensions
+  h:
+    in: query
+    name: h
+    required: false
+    schema:
+      oneOf:
+        - type: number
+        - type: string
+    description: The final height of the processed image in pixels.
+  w:
+    in: query
+    name: w
+    required: false
+    schema:
+      oneOf:
+        - type: number
+        - type: string
+    description: The final width of the processed image in pixels.
+GetUserOptions:
+  with_follow_counts:
+    in: query
+    name: with_follow_counts
+    required: false
+    schema:
+      type: boolean
+    description: If true the returned user object will contain keys `followers_count`, `following_count`

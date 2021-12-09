@@ -1,0 +1,89 @@
+post:
+  description: |
+    Updates an activity's `to` fields
+    Requires you to provide at least one parameter for `newTargets`, `addedTargets`, or `removedTargets`.
+    Can't include add_targets or removedTargets if you're also including newTargets.
+    Can't have the same feed ID in addedTargets and removedTargets.
+  tags:
+    - Feed *
+  parameters:
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+    - $ref: '../../../components/parameters/path.yml#/FeedPathParameters/user_id'
+    - $ref: '../../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../../components/parameters/common.yml#/stream-auth-type'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            foreign_id:
+              type: string
+              description: The foreign_id of the activity to update
+            time:
+              type: string
+              format: date-time
+              description: The time of the activity to update
+            new_targets:
+              type: array
+              items:
+                type: string
+              description: Set the new "to" targets for the activity - will remove old targets
+            added_targets:
+              type: array
+              items:
+                type: string
+              description: Add these new targets to the activity
+            removed_targets:
+              type: array
+              items:
+                type: string
+              description: Remove these targets from the activity
+        examples:
+          Set new targets:
+            value:
+              foreign_id: 476f43c4-489c-11ec-aec8-a4bb6d26ac2f
+              time: 2021-11-18T16:38:25.79Z
+              new_targets: [ 'timeline:DoeJoe' ]
+          Add new targets:
+            value:
+              foreign_id: 476f43c4-489c-11ec-aec8-a4bb6d26ac2f
+              time: 2021-11-18T16:38:25.79Z
+              added_targets: [ 'timeline:MustermannMax' ]
+          Add new targets and remove some old ones:
+            value:
+              foreign_id: 476f43c4-489c-11ec-aec8-a4bb6d26ac2f
+              time: 2021-11-18T16:38:25.79Z
+              added_targets: [ 'timeline:DoeJane' ]
+              removed_targets: [ 'timeline:DoeJoe' ]
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+          example:
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+          example:
+    404:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          example:
+            detail: |
+              activity is not found for the couple
+              foreign_id=476f43c4-489c-11ec-aec8-a4bb6d26ac2f, time=2021-11-18 16:38:25.799
+              +0000 UTC
+            status_code: 404
+            code: 16
+            exception: DoesNotExistException
+            duration: 1.67ms
+            more_info: https://getstream.io/docs/api_error_responses
+
+    403:
+      $ref: '../../../components/examples/ErrorAPIResponse.yml#/Forbidden'

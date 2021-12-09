@@ -1,0 +1,58 @@
+post:
+  description: Create a new user
+  tags:
+    - User *
+  parameters:
+    - $ref: '../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+    - in: query
+      name: get_or_create
+      required: false
+      schema:
+        type: boolean
+        default: true
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/APIRequestPayload.yml#/UserCreatePayload'
+        example:
+          id: HerbertHarry
+          data:
+            about: abcde
+            banner_url: null
+            email: harry.herbert@email.com
+            first_name: Harry
+            handle: HerbertHarry
+            id: 61ac2580-4bdb-11ec-ab2f-a4bb6d26ac2f
+            joined: '2021-11-22T21:35:36.619638Z'
+            last_name: Herbert
+            name: Harry Herbert
+            profileImage: null
+            website: null
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/UserAPIResponse'
+          example:
+            created_at: '2021-11-22T21:35:36.619638Z'
+            updated_at: '2021-11-22T21:35:36.619638Z'
+            id: HerbertHarry
+            data:
+              about: abcde
+              banner_url: null
+              email: harry.herbert@email.com
+              first_name: Harry
+              handle: HerbertHarry
+              id: 61ac2580-4bdb-11ec-ab2f-a4bb6d26ac2f
+              joined: '2021-11-22T21:35:36.619638Z'
+              last_name: Herbert
+              name: Harry Herbert
+              profileImage: null
+              website: null
+            duration: 3.99ms
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/ForbiddenMissingPolicies'

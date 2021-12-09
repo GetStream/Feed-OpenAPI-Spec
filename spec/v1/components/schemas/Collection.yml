@@ -1,0 +1,34 @@
+BaseCollection:
+  type: object
+  required:
+    - collection
+    - data
+    - id
+  properties:
+    collection:
+      type: string
+    data:
+      type: object
+      description: any custom fields you have
+    id:
+      type: string
+CollectionResponse:
+  allOf:
+    - $ref: '#/BaseCollection'
+    - type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        foreign_id:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+NewCollectionEntry:
+  allOf:
+    - $ref: '#/BaseCollection'
+    - type: object
+      properties:
+        user_id:
+          type: string

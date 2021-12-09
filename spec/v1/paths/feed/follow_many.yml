@@ -1,0 +1,49 @@
+post:
+  description: Follow multiple feeds with one API call
+  tags:
+    - Feed *
+  parameters:
+    - $ref: '../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+    - in: query
+      name: activity_copy_limit
+      required: false
+      schema:
+        type: number
+      description: How many activities should be copied from the target feed
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: '../../components/schemas/Feed.yml#/BaseFollowRelation'
+        example:
+          - source: 'timeline:SmithAnne'
+            target: 'user:MustermannMax'
+          - source: 'timeline:SmithAnn'
+            target: 'user:DoeJoe'
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            duration: '9.54ms'
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+          example:
+            detail: Request payload is not valid
+            status_code: 400
+            code: 4
+            exception: InputException
+            duration: 0.11ms
+            more_info: https://getstream.io/docs/api_error_responses
+    403:
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'

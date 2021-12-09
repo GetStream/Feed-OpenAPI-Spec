@@ -1,0 +1,147 @@
+MinimumActivityPayload:
+  foreign_id: "569c291a-43a7-11ec-a4d2-a4bb6d26ac2f"
+  time: "2021-10-21T22:00:04.720727"
+  object: "abcdef"
+  actor: "SmithAnne"
+  verb: "post"
+NewActivityPayload:
+  foreign_id: "70ea9b0c-46d7-11ec-ae65-a4bb6d26ac2f"
+  object: "xxx"
+  actor: "SU:SmithAnne"
+  verb: "post"
+  origin: "user:SmithAnne"
+  text: "xxx"
+  attachments:
+    files: [ ]
+    images: [ ]
+NewActivityResponseData:
+  actor: SU:SmithAnne
+  attachments:
+    files: [ ]
+    images: [ ]
+  duration: 5.37ms
+  foreign_id: 70ea9b0c-46d7-11ec-ae65-a4bb6d26ac2f
+  id: 772eaacd-46f9-11ec-b04c-0ac74274a1c1
+  object: xxx
+  origin: null
+  target: ''
+  text: xxx
+  time: '2021-11-16T16:23:00.199087'
+  verb: post
+CustomActivityPayload:
+  id: "3f324361-32ba-11ec-95fa-12e0c51dd22e"
+  origin: "user:SmithAnne"
+  text: "abcdef"
+  target: ""
+  attachments:
+    files: [ ]
+    images: [ ]
+  $ref: "#/MinimumActivityPayload"
+CustomActivityPayloadWithEnrichedUser:
+  $ref: "#/CustomActivityPayload"
+  actor:
+    $ref: 'User.yml#/EnrichedUser'
+CustomActivityPayloadWithEnrichedUserAndReactions:
+  allOf:
+    - $ref: "Activity.yml#/CustomActivityPayloadWithEnrichedUser"
+    - $ref: "#/ActivityReactions"
+ActivityReactions:
+  latest_reactions:
+    comment:
+      - created_at: '2021-10-22T10:16:15.024678Z'
+        updated_at: '2021-10-22T10:16:15.024678Z'
+        id: '859edfdd-960d-4a50-a574-b22c0b670043'
+        user_id: SmithAnne
+        user:
+          $ref: 'User.yml#/EnrichedUser'
+        kind: comment
+        activity_id: 3f324361-32ba-11ec-95fa-12e0c51dd22e
+        data:
+          attachments:
+            files: [ ]
+            images: [ ]
+          text: abc comment 2
+        parent: ''
+        latest_children:
+          repost:
+            - created_at: '2021-11-04T16:02:10.993852Z'
+              updated_at: '2021-11-04T16:02:10.993852Z'
+              id: 79d282cd-0b81-4f88-9d3c-77a1a1192bbf
+              user_id: SmithAnne
+              user:
+                $ref: 'User.yml#/EnrichedUser'
+              kind: repost
+              activity_id: 3f324361-32ba-11ec-95fa-12e0c51dd22e
+              data: { }
+              parent: 859edfdd-960d-4a50-a574-b22c0b670043
+              latest_children: { }
+              children_counts: { }
+        children_counts:
+          repost: 1
+      - created_at: '2021-10-21T22:00:20.186018Z'
+        updated_at: '2021-10-21T22:00:20.186018Z'
+        id: 4ca8deff-fcad-4e97-a3b0-9605bd5ad644
+        user_id: SmithAnne
+        user:
+          $ref: 'User.yml#/EnrichedUser'
+        kind: comment
+        activity_id: 3f324361-32ba-11ec-95fa-12e0c51dd22e
+        data:
+          attachments:
+            files: [ ]
+            images: [ ]
+          text: abc comment 1
+        parent: ''
+        latest_children:
+          comment:
+            - created_at: '2021-10-21T22:15:49.257735Z'
+              updated_at: '2021-10-21T22:15:49.257735Z'
+              id: 6bd04931-b2ac-4c65-97a3-c7501aa66ac4
+              user_id: SmithAnne
+              user:
+                $ref: 'User.yml#/EnrichedUser'
+              kind: comment
+              activity_id: 3f324361-32ba-11ec-95fa-12e0c51dd22e
+              data:
+                attachments:
+                  files: [ ]
+                  images: [ ]
+                text: abc comment 1 subcomment 1
+              parent: 4ca8deff-fcad-4e97-a3b0-9605bd5ad644
+              latest_children: { }
+              children_counts: { }
+          repost:
+            - created_at: '2021-10-21T22:12:52.214532Z'
+              updated_at: '2021-10-21T22:12:52.214532Z'
+              id: b58d3dc2-c456-41fe-8409-b35729fcc7c7
+              user_id: SmithAnne
+              user:
+                $ref: 'User.yml#/EnrichedUser'
+              kind: repost
+              activity_id: 3f324361-32ba-11ec-95fa-12e0c51dd22e
+              data: { }
+              parent: 4ca8deff-fcad-4e97-a3b0-9605bd5ad644
+              latest_children: { }
+              children_counts: { }
+        children_counts:
+          comment: 1
+          like: 0
+          repost: 1
+    like:
+      - created_at: '2021-11-04T16:00:22.611276Z'
+        updated_at: '2021-11-04T16:00:22.611276Z'
+        id: f1ce0f3d-6582-4ef9-82d6-920ced2a7a81
+        user_id: SmithAnne
+        user:
+          $ref: 'User.yml#/EnrichedUser'
+        kind: like
+        activity_id: 3f324361-32ba-11ec-95fa-12e0c51dd22e
+        data: { }
+        parent: ''
+        latest_children: { }
+        children_counts: { }
+  latest_reactions_extra:
+    comment:
+      next: ''
+    like:
+      next: ''

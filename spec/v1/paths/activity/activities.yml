@@ -1,0 +1,113 @@
+parameters:
+  - $ref: '../../components/parameters/common.yml#/x-stream-client'
+  - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+post:
+  description: |
+    Send a JSON encoded list of activities to update. Max len is 100.
+    This is particularly useful when you want to update certain activity
+    metadata used during feed ranking. Activities are updated by `foreign_id`.
+    Changing the original `time` property is not allowed.
+  tags:
+    - Activity *
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            activities:
+              type: array
+              items:
+                $ref: '../../components/schemas/Activity.yml#/UpdateActivity'
+        examples:
+          "Minimum Payload":
+            value:
+              $ref: '../../components/examples/Activity.yml#/MinimumActivityPayload'
+          "Custom Values Payload":
+            value:
+              $ref: '../../components/examples/Activity.yml#/CustomActivityPayload'
+          "Custom Values Payload W/ Enriched User":
+            value:
+              $ref: '../../components/examples/Activity.yml#/CustomActivityPayloadWithEnrichedUser'
+  responses:
+    '200':
+      description: 'OK'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+          example:
+            $ref: '../../components/examples/APIResponse.yml#/APIResponse'
+    '400':
+      description: 'Bad Request'
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '../../components/schemas/APIResponse.yml#/ErrorAPIResponse'
+              - $ref: '../../components/schemas/APIResponse.yml#/FieldsErrorAPIResponse'
+          examples:
+            "Payload Missing Required Field foreign_id":
+              description: 'Omitted field `foreign_id` from the payload'
+              value:
+                detail: "The activity.foreign_id field is required"
+                status_code: 400
+                code: 4
+                exception: "InputException"
+                duration: "0.16ms"
+                more_info: "https://getstream.io/docs/api_error_responses"
+            "Payload Missing Required Field":
+              description: 'Omitted field `verb` from the payload'
+              value:
+                detail: "Errors for fields 'verb'"
+                status_code: 400
+                code: 4
+                exception: "InputException"
+                exception_fields:
+                  verb:
+                    - "verb is a required field"
+                duration: "0.16ms"
+                more_info: "https://getstream.io/docs/api_error_responses"
+    '403':
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
+get:
+  description: 'Retrieve specific **non-enriched** activities. One of the following is required: param `ids` OR params `foreign_ids` & `timestamps`.'
+  tags:
+    - Activity
+  parameters:
+    - $ref: '../../components/parameters/query.yml#/GetActivitiesOptions/ids'
+    - $ref: '../../components/parameters/query.yml#/GetActivitiesOptions/foreign_ids'
+    - $ref: '../../components/parameters/query.yml#/GetActivitiesOptions/timestamps'
+  responses:
+    '200':
+      description: 'OK'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/GetActivitiesAPIResponse'
+          example:
+            duration: "1.16ms"
+            results:
+              - actor: "SU:SmithAnne"
+                attachments:
+                  files: []
+                  images: []
+                foreign_id: "bf4b4534-43f4-11ec-8190-a4bb6d26ac2f"
+                id: "3f324361-32ba-11ec-95fa-12e0c51dd22e"
+                object: "abc"
+                origin: null
+                target: ""
+                text: "abc"
+                time: "2021-10-21T22:00:04.720727"
+                verb: "post"
+              - actor: "SU:SmithAnne"
+                attachments:
+                  files: []
+                  images: []
+                foreign_id: "cf7364aa-43f4-11ec-9b24-a4bb6d26ac2f"
+                id: "0cc3a2bf-3e32-11ec-b3f6-0ac74274a1c1"
+                object: "aa"
+                origin: null
+                target: ""
+                text: "aa"
+                time: "2021-11-05T12:15:22.507744"
+                verb: "post"

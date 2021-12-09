@@ -1,0 +1,61 @@
+Forbidden:
+  description: 'Forbidden'
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/APIResponse.yml#/ErrorAPIResponse'
+      examples:
+        'Server-Only Access':
+          summary: ''
+          value:
+            detail: "This endpoint cannot be accessed with user authentication"
+            status_code: 403
+            code: 17
+            exception: "NotAllowedException"
+            duration: "0.00ms"
+            more_info: "https://getstream.io/docs/api_error_responses"
+ForbiddenInsufficientPermissions:
+  description: 'Permissions in JWT have to be set to at least the following: ```{
+  "resource": "activity",
+  "action": "create",
+  "feed_id": "user:SmithAnne"
+}```'
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/APIResponse.yml#/ErrorAPIResponse'
+      example:
+        detail: You do not have permission to perform this action.
+        status_code: 403
+        code: 17
+        exception: NotAllowedException
+        duration: 0.00ms
+        more_info: https://getstream.io/docs/api_error_responses
+ForbiddenMissingPolicies:
+  description: Forbidden
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/APIResponse.yml#/ErrorAPIResponse'
+      example:
+        detail: |
+          You do not have permission to do this, you got this error because there are no
+          policies allowing this request on this application. Please consult the
+          documentation https://getstream.io/docs/
+        status_code: 403
+        code: 17
+        exception: NotAllowedException
+        duration: 0.19ms
+        more_info: https://getstream.io/docs/api_error_responses
+404:
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/APIResponse.yml#/ErrorAPIResponse'
+      example:
+        detail: Reaction does not exist
+        status_code: 404
+        code: 16
+        exception: DoesNotExistException
+        duration: 1.77ms
+        more_info: https://getstream.io/docs/api_error_responses

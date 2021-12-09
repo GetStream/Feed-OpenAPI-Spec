@@ -1,0 +1,51 @@
+post:
+  description: |
+    Add one activity to many feeds.
+    This endpoint cannot be called if the JWT contains the `user_id`.
+  tags:
+    - Feed *
+  parameters:
+    - $ref: '../../components/parameters/path.yml#/FeedPathParameters/feed_slug'
+    - $ref: '../../components/parameters/path.yml#/FeedPathParameters/user_id'
+    - $ref: '../../components/parameters/common.yml#/x-stream-client'
+    - $ref: '../../components/parameters/common.yml#/stream-auth-type'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            activity:
+              type: object
+              required: true
+              properties:
+                $ref: '../../components/schemas/Activity.yml#/Activity'
+            feeds:
+              type: array
+              required: true
+              items:
+                type: string
+        example:
+          activity:
+            foreign_id: 70ea9b0c-46d7-11ec-ae65-a4bb6d26ac2f
+            object: xxxx
+            actor: SU:SmithAnne
+            verb: post
+            origin: user:SmithAnne
+            text: xxxx
+            attachments:
+              files: [ ]
+              images: [ ]
+          feeds:
+            - user:MustermannMax
+            - user:SmithAnne
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/APIResponse.yml#/APIResponse'
+            example:
+              duration: "12.54ms"
+    '403':
+      $ref: '../../components/examples/ErrorAPIResponse.yml#/Forbidden'
