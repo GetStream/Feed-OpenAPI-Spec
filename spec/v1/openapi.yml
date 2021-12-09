@@ -24,7 +24,7 @@ info:
     [website](https://getstream.io/activity-feeds/).
 
     ### How to get a JWT
-    You can generate the JWT at [jwt.io](https://jwt.io/).
+    You can generate the JWT at [generator.getstream.io](https://generator.getstream.io/).
 
     ### Server-Side Only endpoints
     In order to perform requests to endpoints marked as Server-Side Only, your token should
